@@ -1,4 +1,4 @@
-export const config = {
+ const config = {
   application: {
     cors: {
       server: [
@@ -10,3 +10,4 @@ export const config = {
     }
   }
 }
+module.exports = { config }
