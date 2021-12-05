@@ -6,16 +6,15 @@ module.exports = (sequelize) => {
   // ID
   // Nombre
   sequelize.define('Temperamento', {
-    ID: {
+    id: {
       type: DataTypes.UUID,
-      allowNull: false,
-      unique: true,
       primaryKey: true,
-      defaultValue: DataTypes.UUID4,
+      unique: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+     
     }
   },{
     timestamps: false,

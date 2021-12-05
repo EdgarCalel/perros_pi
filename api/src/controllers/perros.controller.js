@@ -50,24 +50,55 @@ res.status(404).send('NO se logro encontrar al perro');
 }
 }
 const findId = async (req, res) => {
-  console.log('aqui va estar la busqueda por id')
-  res.send('aqui voy a buscar por id')
-
+  try {
+    const { id } = req.params;
+    const allDogs = await JoinApiBd();
+    if (!id) {
+        res.status(404).json("Couldn't find the name on DBase")
+    } else {
+        const dog = allDogs.find(dogui => dogui.id === id);
+        res.status(200).json(dog)
+    }
+} catch (error) {
+    res.status(404).send('esto no da '+error)
 }
-const CreateDog = async (req, res) => {
-    const { name, height, weight, life_span } = req.body;
-    Dog.create({name, height, weight, life_span })
-      .then((newDog) => {
-        res.json(newDog);
-      })
-      .catch((error) => {
-
-        console.log(error)
-      })
-
-
-  //})
-
+      //  const  id  = req.params.id;
+      //  const DogAll = await JoinApiBd();
+      // //  res.json(DogAll)
+      //  if (id) {
+      //   const dog = DogAll.filter(d => d.id===id);
+      //   dog.length ?
+      //   res.status(200).json(dog):
+      //      res.status(404).json("No se logro encontrar al perro")
+      //  }
 }
+const CreateDog = async (req, res) =>{
+  const { name, height, weight, temperamentoB, life_span } = req.body;
+  const dogNew = await Dog.create({name, height, weight, life_span })
+  let temperamentoIn = await Temperamento.findAll({
+    where: { name:temperamentoB}
+  })
+  dogNew.addTemperamento(temperamentoIn);
+res.send('Ha Creado con exito el perro')
+}
+
+// const CreateDog = async (req, res) => {
+//     const { name, height, weight,temperamentoB, life_span } = req.body;
+//     Dog.create({name, height, weight, life_span })
+//       .then((newDog) => {
+//         let temperamentoIn =  Temperamento.findAll({where: { name:temperamentoB}})
+//        newDog.addTemperamento(temperamentoIn);
+//       //  res.send('Ha Creado con exito el perro');
+//         res.json(newDog); 
+//       })
+//       .catch((error) => {
+
+//         console.log(error)
+//       })
+
+
+//   //})
+
+// }
 
 module.exports = { PerrobyApi, infoBD, findAll, findId, CreateDog}

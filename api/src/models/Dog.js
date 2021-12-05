@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
   //   Peso *
   //   Años de vida
   sequelize.define('Dog', {
-    ID: {
+    id: {
       type: DataTypes.UUID,
       allowNull: false,
       unique: true,

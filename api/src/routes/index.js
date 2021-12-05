@@ -15,7 +15,7 @@ const { findDogTemperament } = require('../controllers/Temperament.controller');
 // router.get('/Perros', PerrobyApi);
 // router.get('/PerrosBd', infoBD);
 router.get('/dogs', findAll)
-router.get('/dogsid', findId)
+router.get('/dogss/:id', findId)
 router.get('/temperaments', findDogTemperament)
 router.post('/dogs', CreateDog)
 

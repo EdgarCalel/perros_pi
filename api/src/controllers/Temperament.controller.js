@@ -2,21 +2,20 @@ const axios = require('axios')
 const { Dog, Temperamento } = require('../db')
 
 const findDogTemperament = async (req, res) => {
-  const temperament = await axios.get('https://api.thedogapi.com/v1/breeds');
-  const temperamentApi =  temperament.data.map(tem => tem.temperament);
-const tempre = temperamentApi.map(tem =>{
-  // console.log(tem2)
-
-
-   for(let i =0; i<tem.length; i++) return tem[i]
-});
-
-  tempre.forEach(tem=>{
-    Temperamento.findOrCreate({
-      where: {name: tem}
-    })
-  })
-  const TemperamentAll = await Temperamento.findAll();
-  res.send(TemperamentAll)
+  // const temperamentApi = await axios.get('https://api.thedogapi.com/v1/breeds');
+  try {
+    const temperamentApi = await axios.get('https://api.thedogapi.com/v1/breeds');
+      let temperamentex = temperamentApi.data.map(d => d.temperament ? d.temperament : "no se tiene temperamento");
+      let temp2 =temperamentex.map(d => d?.split(', '))
+      temp2.forEach(el => {
+          if (el) Temperamento.findOrCreate({
+            where: { name: el }})
+      });
+      temperamentoBd = await Temperamento.findAll();
+      res.status(200).json(temperamentoBd);
+  } catch (error) {
+      res.status(404).send('No se tiene respuesta a su solicitud' + error)
+  }
+ 
 }
 module.exports = { findDogTemperament}
