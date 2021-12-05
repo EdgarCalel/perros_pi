@@ -3,9 +3,13 @@ const { Dog, Temperamento } = require('../db')
 
 const findDogTemperament = async (req, res) => {
   const temperament = await axios.get('https://api.thedogapi.com/v1/breeds');
-  const temperamentApi = await temperament.data.map(tem => tem.temperament);
+  const temperamentApi =  temperament.data.map(tem => tem.temperament);
 const tempre = temperamentApi.map(tem =>{
-  for(let i =0; i<tem.length; i++) return tem[i]});
+  // console.log(tem2)
+
+
+   for(let i =0; i<tem.length; i++) return tem[i]
+});
 
   tempre.forEach(tem=>{
     Temperamento.findOrCreate({
