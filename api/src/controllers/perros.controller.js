@@ -82,7 +82,7 @@ res.send('Ha Creado con exito el perro')
 //         let temperamentoIn =  Temperamento.findAll({where: { name:temperamentoB}})
 //        newDog.addTemperamento(temperamentoIn);
 //       //  res.send('Ha Creado con exito el perro');
-//         res.json(newDog); 
+//         res.json(newDog);
 //       })
 //       .catch((error) => {
 
