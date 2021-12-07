@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom';
 import './navbar.css';
 
-const Navbar = () => {
+export default function Navbar () {
   return (
-    <header >
+    <div >
       <nav className="NavPrincipal">
         <ul className="ulNavbar">
 
           <Link to='/'>Inicio</Link>
-          <Link to='/Formulario'>Formulario</Link>
           <Link to='/Perros'>Recetas</Link>
+          <Link to='/Formulario'>Crear Perro</Link>
+
 
         </ul>
       </nav>
-    </header>
+    </div>
   );
 };
-export default Navbar;
