@@ -2,11 +2,10 @@ const axios = require('axios')
 const { Dog, Temperamento } = require('../db')
 
 const findDogTemperament = async (req, res) => {
-  // const temperamentApi = await axios.get('https://api.thedogapi.com/v1/breeds');
   try {
     const temperamentApi = await axios.get('https://api.thedogapi.com/v1/breeds');
       let temperamentex = temperamentApi.data.map(d => d.temperament ? d.temperament : "no se tiene temperamento");
-      let temp2 =temperamentex.map(d => d?.split(', '))
+      let temp2 =temperamentex.map(d => d.split(', '))
       temp2.forEach(el => {
           if (el) Temperamento.findOrCreate({
             where: { name: el }})

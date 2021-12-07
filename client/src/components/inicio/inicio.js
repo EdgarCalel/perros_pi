@@ -1,9 +1,12 @@
 import React from 'react';
+import './inicio.css'
 
 export default function Inicio() {
   return (
-    <>
-    Hola soy el inicio
-    </>
+  
+    <div className="fondo">
+  fondo
+    </div>
+  
   );
 }

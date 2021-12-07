@@ -1,6 +1,8 @@
 const axios = require('axios')
 const { Dog, Temperamento} = require('../db')
 
+
+
 const PerrobyApi = async (req, res)=>{
   try {
     // const urlsearch = await axios('https://api.thedogapi.com/v1/breeds/search');
@@ -14,12 +16,12 @@ const PerrobyApi = async (req, res)=>{
         weight: ed.weight
       }
     })
-    return infoApi
+  return infoApi
   } catch (error) {
     console.log(error);
   }
+};
 
-}
 const infoBD = async ()=>{
   return await Dog.findAll({
     include:{
@@ -30,8 +32,8 @@ const infoBD = async ()=>{
       },
     }
   })
-
 }
+
 const JoinApiBd = async ()=>{
   const infoApi = await PerrobyApi();
   const infoBd = await infoBD();
@@ -40,7 +42,9 @@ const JoinApiBd = async ()=>{
 }
 
 const findAll = async (req, res)=>{
-const name = req.query.name
+const name = req.query.name;
+// const { name } = req.query;
+
 let findDogs = await JoinApiBd();
 if (name) {
   let DogsName = await findDogs.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
@@ -58,16 +62,17 @@ const { id } = req.params;
 const dogTotal = await JoinApiBd()
 if (id) {
   let dogId = await dogTotal.filter(el => el.id == id)
-  if (dogId.length>0) {
-    res.status(200).json(dogId);
-  }else{
+  dogId.length?
+    res.status(200).json(dogId):
     res.status(404).send('No se encontro el perro que buscaba')
-  }
+  
 }
 }
 const CreateDog = async (req, res) =>{
   const { name, height, weight, temperamentoB, life_span } = req.body;
+
   const dogNew = await Dog.create({name, height, weight, life_span })
+  
   let temperamentoIn = await Temperamento.findAll({
     where: { name:temperamentoB}
   })
