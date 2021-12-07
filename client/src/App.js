@@ -18,7 +18,6 @@ function App() {
     <Route exact path='/Formulario' element={<Formulario />} />
     <Route exact path='*' element={<Error />} />
   </Routes>
-  
 </Router>
     </div>
   );
