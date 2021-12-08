@@ -27,7 +27,7 @@ const infoBD = async ()=>{
     include:{
       model: Temperamento,
       atributes: ['name'],
-      through:{
+                through:{ 
         atributes:[],
       },
     }
@@ -40,14 +40,13 @@ const JoinApiBd = async ()=>{
   const infoTotal = infoApi.concat(infoBd);
   return infoTotal
 }
-
+                      
 const findAll = async (req, res)=>{
-const name = req.query.name;
-// const { name } = req.query;
-
+// const name = req.query.name;
+const { name } = req.query; 
 let findDogs = await JoinApiBd();
 if (name) {
-  let DogsName = await findDogs.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
+  let DogsName = await findDogs.filter(d=>d.name.includes(name.toLowerCase()))
 DogsName.length?
 res.status(200).send(DogsName) :
 res.status(404).send('NO se logro encontrar al perro');
@@ -65,7 +64,6 @@ if (id) {
   dogId.length?
     res.status(200).json(dogId):
     res.status(404).send('No se encontro el perro que buscaba')
-  
 }
 }
 const CreateDog = async (req, res) =>{
@@ -90,13 +88,9 @@ res.send('Ha Creado con exito el perro')
 //         res.json(newDog);
 //       })
 //       .catch((error) => {
-
 //         console.log(error)
 //       })
-
-
 //   //})
-
 // }
 
 module.exports = { PerrobyApi, infoBD, findAll, findId, CreateDog}
