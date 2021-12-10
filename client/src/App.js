@@ -13,12 +13,12 @@ function App() {
 <Router>
 <MainHeader />
   <Routes>
-    <div>
+  
     <Route exact path='/' element={<Inicio />} />
     <Route exact path='/Perros' element={<Perros />} />
     <Route exact path='/Formulario' element={<Formulario />} />
     <Route exact path='*' element={<Error />} />
-    </div>
+   
   </Routes>
 </Router>
     </div>

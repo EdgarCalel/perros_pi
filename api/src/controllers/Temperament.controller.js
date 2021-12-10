@@ -7,8 +7,12 @@ const findDogTemperament = async (req, res) => {
       let temperamentex = temperamentApi.data.map(d => d.temperament ? d.temperament : "no se tiene temperamento");
       let temp2 =temperamentex.map(d => d.split(', '))
       temp2.forEach(el => {
-          if (el) Temperamento.findOrCreate({
-            where: { name: el }})
+        try {
+          if (el){ Temperamento.findOrCreate({
+            where: { name: el }})}
+        } catch (error) {
+          console.log(error)
+        }
       });
       temperamentoBd = await Temperamento.findAll();
       res.status(200).json(temperamentoBd);
