@@ -10,7 +10,7 @@ Datainfo();
     });
 
     const Datainfo = async ()=>{
-const dataApi = await axios('https://api.thedogapi.com/v1/breeds')
+const dataApi = await axios('localhost:3001/dogs')
 const todo = await dataApi.data.map(el =>(el.name))
 setPerfil(todo)
     }

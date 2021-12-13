@@ -8,9 +8,10 @@ const PerrobyApi = async (req, res)=>{
       return{
         id: ed.id,
         name: ed.name,
-        image: ed.image,
+        image: ed.image.url,
         temperament: ed.temperament,
-        weight: ed.weight
+        weight: ed.weight.metric,
+        height: ed.height.metric
       }
     })
   return infoApi
@@ -25,9 +26,11 @@ const DogByName = async (req, res)=>{
         return{
           id: ed.id,
           name: ed.name,
-          image: ed.image,
           temperament: ed.temperament,
-          weight: ed.weight
+          // weight: ed.weight.imperial,
+          // height: ed.height.imperial,
+          image : ed.image.url,
+          life_span: ed.life_span
         }
       })
   
@@ -57,17 +60,10 @@ const JoinApiBd = async ()=>{
   return infoTotal
 }               
 const findAll = async (req, res)=>{
-// const name = req.query.name;
-const { name } = req.query; 
+
 let findDogs = await JoinApiBd();
-if (name) {  
-  let DogsName = await findDogs.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))                                    
-DogsName.length? 
-res.status(200).send(DogsName)  : 
-res.status(404).send('NO se logro encontrar al perro');
-}else{
   res.status(200).send(findDogs) 
-}
+
 }
 const findId = async (req, res) => {
 const { id } = req.params;

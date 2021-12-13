@@ -1,0 +1,54 @@
+.ContenidoBody{
+    display: flex;
+    width: 100%;   
+}
+.OpFiltros{
+    background: rgb(0,252,255);
+background: linear-gradient(0deg, rgba(0,252,255,1) 0%, rgba(45,212,42,1) 44%, rgba(228,237,7,1) 100%);
+    width: 15%;
+    height: 100vh;
+    display: flex;
+    align-items:flex-start;
+    justify-content: center;
+    border-right: black 10px solid;
+
+}
+.TarjetasPeros{
+    width: 85%;
+    background: url('https://st2.depositphotos.com/3532197/5226/v/950/depositphotos_52265267-stock-illustration-traces-dogs-seamless-pattern.jpg')center center fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.numero{
+    display: flex;
+    width: 90%;
+    height: 30px;
+    justify-content: center;
+}
+
+.numero li{
+list-style: none;
+margin: 1px;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 50%;
+border-radius: 10px;
+background: rgb(2,0,36);
+background: linear-gradient(11deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+.numero li:hover{
+    cursor: pointer;
+    padding:15px;
+    font-size:20px;
+    box-shadow: 2px 2px 10px #171a1a, -2px -2px 10px #323636;
+    transition:0.5s;  
+}

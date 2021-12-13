@@ -1,13 +1,18 @@
-const initialState={
-    dogs : []
+const initialState ={
+    dogs:[],
+    getId:[]
 }
-export default function rootReducer (state = initialState, action){
-switch(action.type){
-case 'G_dogs':
-    return{
-        ...state,
-        dogs:action.payload
+
+ function rootReducer(state = initialState, action){
+    switch (action.type) {
+        case 'ALL_DOGS':
+        return {...state,dogs: action.payload }
+
+        case 'GET_ID':
+            return {...state, getId: action.payload}
+       
+        default: 
+        return state
     }
-    default:return state;
 }
-}
+export default  rootReducer

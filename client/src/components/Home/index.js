@@ -1,53 +1,68 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getDogs } from '../../actions/index'
-import { Link } from 'react-router-dom'
-import Card from '../Card/card'
+import React, {
+    useState, 
+    useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { allPerros, allId } from '../../actions/index';
+import { Link } from 'react-router-dom';
+import Card from '../Card/Card';
+import './home.css'
+import Filtros from '../Perros/filtros'
+import Paginado from './paginado'
 
 export default function Home() {
     const dispatch = useDispatch()
-    const alldogs = useSelector((state) => state.dogs)
-
+    const dogs =  useSelector((state) => state.dogs)
+    const getId = useSelector(state => state.getId)
+   
     useEffect(() => {
-    dispatch(getDogs())
-    }, [])
+    dispatch(allPerros(),allId())}, [dispatch])
+const allDogs = useSelector((state)=>state.dogs)
+const [currentPage, setcurrentPage] = useState(1)
+const [DogsForPage, setDogsForPage] = useState(6)
+const ultimoDogsList = currentPage * DogsForPage;
+const primerDogsList = ultimoDogsList - DogsForPage
+const currentDogs = allDogs.slice(primerDogsList, ultimoDogsList)
 
-const handleClick =(e)=>{
-e.preventDefault();
-dispatch(getDogs())
-
+const paginado =(NumberPage)=>{
+    setcurrentPage(NumberPage)
 }
-    return (
-        <div>
-        <Link to="/dogs">Crear Personaje</Link>
-        <h1>aguante dogs</h1>
-        <button  onClick={e=>handleClick(e)}>mostrar todo</button>
-        <div>
-            <select name="" id="">
-                <option value="asc">ascendente</option>
-                <option value="desc">descendente</option>
-            </select>
-            <select name="" id="">
-                <option value="all">todos</option>
-                <option value="muerte">muerte</option>
-            </select>
-            <select name="" id="">
-                <option value="all">todos</option>
-                <option value="created">creados</option>
-                <option value="api">api</option>
-            </select>
-            {
-                alldogs?.map(e=>{
-                    return(
-                <Card name={e.name}/>)
-                })
-            }
-        </div>
-<div>
 
+    return (
+<div className='ContenidoBody'>
+    <div className='OpFiltros'>
+<Filtros />
+    </div>
+    <div className='TarjetasPeros'>
+    <Link to="/dog">Create Dog</Link>
+    <Paginado className="paginado" DogsForPage ={DogsForPage}
+    allDogs={allDogs.length}
+    paginado ={paginado}>
+
+    </Paginado>
+         <div className='cards'>
+            {currentDogs?.map(el =>
+                (<>
+                           {/* <Link to={`/dogs/` + el.id}> */}
+                            <Card
+                            name={el.name}
+                            image={el.image}
+                             weight={el.weight}
+                            temperament={el.temperament?el.temperament:'se desconoce su temperamento'}
+                            key={el.id}
+                            />
+                        {/* </Link> */}
+                    
+                        </>
+                ))}
+   </div>
+   <Paginado className="paginado" DogsForPage ={DogsForPage}
+    allDogs={allDogs.length}
+    paginado ={paginado}>
+
+    </Paginado>
+    </div>
 </div>
 
-        </div>
+
     )
 }

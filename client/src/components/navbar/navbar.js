@@ -13,11 +13,11 @@ export default function Navbar () {
           <Link to='/Formulario'>Crear Perro</Link>
           </div>
 <div className="searchDiv">
-          <div class="SearchBox">
-		<input type="text" class="SearchBox-input" placeholder="BUSCA ALGO COOL" />
+          <div className="SearchBox">
+		<input type="text" className="SearchBox-input" placeholder="BUSCA ALGO COOL" />
 	
-			<button class="SearchBox-button">
-				<i class="SearchBox-icon">Buscar</i>
+			<button className="SearchBox-button">
+				<i className="SearchBox-icon">Buscar</i>
 			</button>
 	</div>
 </div>
