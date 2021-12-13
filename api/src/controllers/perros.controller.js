@@ -3,6 +3,8 @@ const { Dog, Temperamento} = require('../db')
 
 const PerrobyApi = async (req, res)=>{
   try {
+    
+    
     const Urlapi = await axios('https://api.thedogapi.com/v1/breeds')
     const infoApi = await Urlapi.data.map(ed =>{
       return{
