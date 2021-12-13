@@ -21,7 +21,7 @@ const PerrobyApi = async (req, res)=>{
 const DogByName = async (req, res)=>{
     const { name } =req.params;
       const Urlapi = await axios(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
-      const infoApi = await Urlapi.data.map(ed =>{
+      const  infoApi = await Urlapi.data.map(ed =>{
         return{
           id: ed.id,
           name: ed.name,
@@ -30,14 +30,13 @@ const DogByName = async (req, res)=>{
           weight: ed.weight
         }
       })
+  
       let findDogs = await infoBD();
       const BdFiltName = findDogs.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
-      const Result = infoApi.concat(BdFiltName)
-      if (Result.length >0) {
-        res.status(200).json(Result)
-      }else{
-       res.json('No se tiene al perro ingresado')
-  }
+
+      const Result = infoApi.concat(BdFiltName)  
+      Result.length? res.status(200).json(Result): res.json('No se tiene al perro ingresado')
+  
 };
 
 const infoBD = async ()=>{

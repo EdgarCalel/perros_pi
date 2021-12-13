@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, 
   Route ,
   Routes} from "react-router-dom";
-  import Inicio from './components/inicio/inicio';
+  import Landing from './components/LandingPage/inicio';
+  import Home from './components/Home/index'
 import Perros from './components/Perros/index';
 import Formulario from './components/Perros/formulario';
 import MainHeader from './components/navbar/navbar';
@@ -13,12 +14,11 @@ function App() {
 <Router>
 <MainHeader />
   <Routes>
-  
-    <Route exact path='/' element={<Inicio />} />
+    <Route exact path='/' element={<Landing />} />
+    <Route exact path='/Home' element={<Home />} />
     <Route exact path='/Perros' element={<Perros />} />
     <Route exact path='/Formulario' element={<Formulario />} />
     <Route exact path='*' element={<Error />} />
-   
   </Routes>
 </Router>
     </div>

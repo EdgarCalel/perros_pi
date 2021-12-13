@@ -8,6 +8,7 @@ export default function Navbar () {
         <ul className="ulNavbar">
           <div className="navContenido">
           <Link to='/'>Inicio</Link>
+          <Link to='/Home'>Home</Link>
           <Link to='/Perros'>Recetas</Link>
           <Link to='/Formulario'>Crear Perro</Link>
           </div>

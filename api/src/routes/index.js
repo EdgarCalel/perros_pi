@@ -19,8 +19,8 @@ router.get('dogs', async (req, res) =>{})
 
 
 router.get('/dogs', findAll)
-router.get('/perro/:name', DogByName)
-router.get('/dogs/:id', findId)
+router.get('/dogs/:name', DogByName)
+router.get('/dogsi/:id', findId)
 router.post('/dogs', CreateDog)
 
 // Temperamentos
