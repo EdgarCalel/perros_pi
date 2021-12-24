@@ -1,211 +1,55 @@
-
- .container{
-   justify-content: center;
-   display: flex;
-}
-
- .card{
-   position: relative;
-   width: 240px;
-   height: 400px;
-   transition-delay: 0.3s;
-   background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-functional-dog-food-promotion-main-map-image_144794.jpg');
-   background-position: center;
-   border-radius: 20px; 
-   box-shadow: inset 1px 1px 60px 20px rgba(0,0,0,0.8);
-   margin: 20px;
+.dogCard {
+  margin: 10px 15px;
+    width: 250px;
+    height: 300px;
+    border-radius: 12px;
+    box-shadow: 10px 7px 8px -6px rgba(0, 0, 0, 0.7);
+background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQgnyf4_1DmYISayiVUCetYDVSA1ol1KJczI-jsmSz-HNrBpjR-pXBxc6B9HfTplAb_qQ&usqp=CAU');
+    background-size: cover;
+    background-position: -20px -50%;
+  }
+  .dogCard:hover{
+    transform: scale(1.05,1.05);
+    box-shadow: 6px 7px 8px 3px rgba(5, 119, 47, 0.7);
   }
 
-   .card:hover {
-   border-bottom-left-radius: 0;
-   border-bottom-right-radius: 0;
+  .dogName{
+    text-align: center;
   }
+  .titleArea {
+    font-size: 1rem;
+  }
+  
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .infoArea {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .tempArea {
+    max-width: 100%;
+  }
+  
+  .dogTemp {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  
+  .imageArea {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    height: 100%;
+    overflow: hidden;
 
-   .card:before {
-  content: '';
-  opacity: 0.7;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: blaCK;
-  clip-path: circle(100px at 50% 50%);
-  transition: 0.5s ease-in-out;
-}
-
-   .card:hover:before{
- clip-path: circle(300px at 50% 90%);
-}
- 
-
- 
-
-   .card:after{
-
-   top: 0%;
-   padding: 20px 20px;
-   letter-spacing: 3px;
-   font-size: 1em;
-   font-weight: 600;
-   font-family: 'Varela', sans-serif;
-   color: rgba(255, 255, 255, 0.295);
- }
- 
-   .card:hover:after{
-   color: rgb(170, 148, 49); 
-}
-   .card .imgBx{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 0;
-  width: 100%;
-  height: 220px;
-  transition: 0.5s;
-}
- 
-   .card:hover .imgBx {
-  top: 0%;
-  transform: translateY(1%);
-}
- 
-   .card .imgBx img{
-   position: absolute;
+  }
+ .dogImage{
    border-radius: 50%;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   width: 170px;
-   height: 170px;
-}
- 
-   .card .contentBx{
-   font-family: 'Poppins', sans-serif;
-   position: absolute;
-   bottom: 0;
-   width: 100%;
-   height: 100px;
-   text-align: center;
-   transition: 1s;
-   z-index: 0;
- }
- 
-   .card:hover .contentBx{
-   height: 210px;
- }
- 
- /* @import url('https://fonts.googleapis.com/css2?family=Genos:wght@500&display=swap'); */
-
-   .card .contentBx h2{
-   position: relative;
-   font-weight: 900;
-   color: rgb(255, 241, 220);
-   text-transform: uppercase;
-   letter-spacing: 1px;
-   font-family: 'Genos', sans-serif;
-   margin: 0;
- }
- 
-  .card .contentBx .quote,   .card .contentBx .name {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   padding: 0px 20px;
-   transition: 0.5s;
-   opacity: 0;
-   visibility: hidden;
- }
- 
-   .card:hover .contentBx .quote{
-   opacity: 1;
-   visibility: visible;
-   transition-delay: 0.5s;
- }
- 
-   .card:hover .contentBx .name{
-   opacity: 1;
-   visibility: visible;
-   transition-delay: 0.6s;
- }
- 
-   .card .contentBx .quote h3{
-   color: #fff;
-   font-weight: 300;
-   font-size: 14px;
-   letter-spacing: 2px;
-   margin-right: 10px;
-   word-break: normal;
- }
- 
-   .card .contentBx .quote h3::before {
-  font-family: 'Font Awesome\ 5 Free';
-  font-weight: 700;
-  font-size: 10px;
-  content: "\f10d";
-  font-style: normal;
-  color: rgba(173, 173, 173, 0.822);
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  position: relative;
-  bottom: 4px;
-  right: 4px;
- }
-
-   .card .contentBx .quote h3::after {
-  font-family: 'Font Awesome\ 5 Free';
-  font-weight: 700;
-  font-size: 10px;
-  content: "\f10e";
-  font-style: normal;
-  color: rgba(173, 173, 173, 0.822);
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  position: relative;
-  bottom: 4px;
-  left: 4px;
- }
-
-   .card .contentBx .name h3{
-  color: rgb(170, 148, 49);
-  font-weight: 300;
-  font-size: 14px;
-  letter-spacing: 2px;
-  margin-right: 10px;
-  word-break: normal;
-}
- 
-   .card .contentBx .quote span:hover{
-   background: #9bdc28;
- }
-
-   .card .contentBx a{
-   display: inline-block;
-   padding: 8px 10px;
-   background: transparent;
-   border-radius: 50%;
-   margin-top: 10px;
-   text-decoration: none;
-   font-weight: 600;
-   color: rgb(255, 255, 255);
-   opacity: 0;
-   transform: translateY(50px);
-   transition: 0.5s;
-   margin-top: 0;
-}
-
-   .card:hover .contentBx a{
-   opacity: 1;
-   transform: translateY(0px);
-   transition-delay: 0.75s;
  }

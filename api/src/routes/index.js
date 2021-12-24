@@ -8,15 +8,14 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 // importaciones
-const { findAll, findId, CreateDog, DogByName } = require('../controllers/perros.controller');
-const { findDogTemperament } = require('../controllers/Temperament.controller');
+const { findAll, findId, CreateDog, DogByName, filterTemperament, deletePerro } = require('../controllers/perros.controller');
+const { findDogTemperament, TemperamentoList, CreateTemperamento, ByTemperament } = require('../controllers/Temperament.controller');
+const { platfomrs }= require('../controllers/platfoms.js')
 const Dog = require('../models/Dog');
 
 // Routes
-
 // perros
 router.get('dogs', async (req, res) =>{})
-
 
 router.get('/dogs', findAll)
 router.get('/dogs/:name', DogByName)
@@ -25,5 +24,11 @@ router.post('/dogs', CreateDog)
 
 // Temperamentos
 router.get('/temperaments', findDogTemperament)
+router.get('/temperamentos', TemperamentoList)
+router.get('/temperamentoFilter/', filterTemperament)
+router.get('/temperamentCreate', CreateTemperamento)
+router.delete('/dogs/:namedelete', deletePerro)
+
+router.get('/platfomrs', platfomrs)
 
 module.exports = router;

@@ -26,60 +26,6 @@ display: flex;
     width: 50%;
     display: flex;
     justify-content: right;
+
 }
 
-
-/*formas de boton*/
-input, button {
-	border: none;
-	background: none;
-	outline: 0;
-}
-button {
-    cursor: pointer
-}
-.SearchBox-input::placeholder {
- color:red;
-	opacity: .5;
-}
-
-.SearchBox-input::-webkit-input-placeholder {
-  color: white;
-}
-
-.SearchBox {
-	display: flex;
-	border-radius:2.5em;
-	background-color: #00bcd4;
-	height: 2.5em;
-    margin-right: 15px;
-}
-
-.SearchBox:hover .SearchBox-input {
-		padding-left: 1.5em;
-		padding-right: 1em;
-		width: 240px;
-	}
-	
-.SearchBox-input {
-		width: 0;
-		font-size: 1.2em;
-		color: #fff;
-		transition: .45s;
-	}
-.SearchBox-button {
-  
-		display: flex;
-		border-radius: 50%;
-		width: 4em;
-		height: 3em;
-		background-color: #f50057;
-		transition: .5s;
-	}
-.SearchBox-button:active  {
-		transform: scale(.85);
-	}
-.SearchBox-icon {
-		margin: auto;
-		color: #fff;
-	}

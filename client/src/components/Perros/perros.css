@@ -1,7 +1,23 @@
-.cont{
-margin-top: 100px;
+/* dog Area */
+.DogContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+   
+  
+
 }
-.cont select{
-    width: 100px;
-    height: 50px;
+.Paginacion{
+  
+        min-width: 100%;
+    
+}
+
+/* filtros */
+.ContenedorFiltros{
+  /* background-color: black; */
+  width: 100vw;
+  color: black;
+  display: flex;
 }

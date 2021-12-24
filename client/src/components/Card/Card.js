@@ -1,29 +1,41 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-
-import React from 'react'
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import './card.css'
-export default function Card({name, temperament, weight, image}) {
+export default function DogCard( { id, name, image, temperament, weight,height, createdInDB} ) {
     return (
-        <div class="container">
-			<div class="card">
-			  <div class="imgBx">
-              <img src={image} alt="image not found" />
-			  </div>
-			  <div class="contentBx">
-              <h2>{name}</h2>
-				<div class="quote">
-				<h3>{temperament}</h3>
-				</div>
-				<div class="name">
-                <h3>{weight}</h3>
-				</div>
-				<a href="#"><i class="fas fa-angle-double-right"></i></a>
-			  </div>
-			</div>
+      <Fragment>
+        <div className="dogCard">
+          <Link to={"/dogs/" + id}>
+            <div className="titleArea">
+              <h4 className="dogName">{name}</h4>
             </div>
-		
+            <div className="infoArea">
+            <div className="imageArea">
+                <img
+                  className="dogImage"
+                  src={image}
+                  alt={`not not found`}
+                  width={150}
+                  height={100}
+                />
+              </div>
+              <div className="tempArea">
+                  <h5 className="dogTemp">{temperament}</h5>
+                  <h5 className="dogTemp">weight {weight}</h5>
+                  <h5 className="dogTemp">Heigt {height}</h5>
+                  <h5 className="dogTemp">hola {createdInDB}</h5>
 
-       
-    )
+
+
+
+                 
+              </div>
+             
+            </div>
+          </Link>
+        </div>
+      </Fragment>
+    );
+
+ 
 }
-

@@ -3,17 +3,21 @@ const { Dog, Temperamento} = require('../db')
 
 const PerrobyApi = async (req, res)=>{
   try {
-    bobada
-
+    
     const Urlapi = await axios('https://api.thedogapi.com/v1/breeds')
     const infoApi = await Urlapi.data.map(ed =>{
       return{
         id: ed.id,
         name: ed.name,
-        image: ed.image.url,
-        temperament: ed.temperament,
+        image: ed.image.url ?ed.image.url: 'no tiene imagen',
+        temperament: ed.temperament ? ed.temperament : 'no tiene temperemanto',
         weight: ed.weight.metric,
-        height: ed.height.metric
+        height: ed.height.metric,
+        weight_min: parseInt(ed.weight.metric.slice(0, 2).trim()),
+        weight_max: parseInt(ed.weight.metric.slice(4).trim()),
+        height_min: parseInt(ed.height.metric.slice(0, 2).trim()),
+        height_max: parseInt(ed.height.metric.slice(4).trim()),
+      
       }
     })
   return infoApi
@@ -29,8 +33,8 @@ const DogByName = async (req, res)=>{
           id: ed.id,
           name: ed.name,
           temperament: ed.temperament,
-          // weight: ed.weight.imperial,
-          // height: ed.height.imperial,
+          weight: ed.weight.imperial,
+          height: ed.height.imperial,
           image : ed.image.url,
           life_span: ed.life_span
         }
@@ -43,17 +47,17 @@ const DogByName = async (req, res)=>{
       Result.length? res.status(200).json(Result): res.json('No se tiene al perro ingresado')
   
 };
-
 const infoBD = async ()=>{
-  return await Dog.findAll({
+return await Dog.findAll({
     include:{
       model: Temperamento,
-      atributes: ['name'],
+      attributes: ['name'],
                 through:{ 
-        atributes:[],
+        attributes:[],
       },
     }
   })
+  
 }
 const JoinApiBd = async ()=>{
   const infoApi = await PerrobyApi();
@@ -79,8 +83,19 @@ if (id) {
     res.status(404).send('No se encontro el perro que buscaba')
 }}
 const CreateDog = async (req, res) =>{
-  const { name, height, weight, temperamentoB, life_span } = req.body;
-  const dogNew = await Dog.create({name, height, weight, life_span })
+  const { name, height_min,
+    height_max,
+    weight_min,
+    weight_max,
+    life_span,
+  temperamentoB }= req.body;
+  const dogNew = await Dog.create({
+    name, 
+    height_min, 
+    height_max,
+    weight_min, 
+    weight_max,
+    life_span })
   
   let temperamentoIn = await Temperamento.findAll({
     where: { name:temperamentoB}
@@ -88,6 +103,26 @@ const CreateDog = async (req, res) =>{
   dogNew.addTemperamento(temperamentoIn);
 res.send('Ha Creado con exito el perro')
 }
+const filterTemperament = async (req, res)=>{
+  const { temperament } = req.query;
+  const everyDog = await findAll();
+  const dogSearchResult = everyDog.filter((dog) => {
+      if (temperament === 'all') return everyDog
+      else if (dog.temperament) {
+          return (dog.temperament.toLowerCase()).includes(temperament.toLowerCase())
+      }
+  });
+  res.status(200).json(dogSearchResult)
+  }
+
+  const deletePerro = async (req, res)=>{
+  const { namedelete } =req.params
+    let result = Dog.findOne({
+    where :{name : namedelete}
+  })
+  res.status(200).json({msg:'se ha eliminado exitosamente'})
+  }
+
 // const CreateDog = async (req, res) => {
 //     const { name, height, weight,temperamentoB, life_span } = req.body;
 //     Dog.create({name, height, weight, life_span })
@@ -103,4 +138,4 @@ res.send('Ha Creado con exito el perro')
 //   //})
 // }
 
-module.exports = { PerrobyApi, infoBD, findAll, findId, CreateDog, DogByName}
+module.exports = { PerrobyApi, infoBD, findAll, findId, CreateDog, DogByName, filterTemperament, deletePerro}
