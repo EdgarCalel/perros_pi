@@ -7,8 +7,6 @@ import {
   filterDogsByTemperament,
   orderByName,
   filterCreated,
-  filterDogsByMAXWeight,
-  filterDogsByMINWeight,
   orderByWeight
 } from "../../actions/index";
 import './perros.css'
@@ -16,69 +14,38 @@ import './perros.css'
 export default function Filtros() {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments)
-  const allDogs = useSelector((state) => state.allDogs);
-  const breeds = useSelector((state) => state.breeds);
-
-  const minWeights = allDogs.map((el) => el.weight_min)
-  const allDogsMinWeights = [...new Set(minWeights)];
-  const maxWeights = allDogs.map((el) => el.weight_max)
-  const allDogsMaxWeights = [...new Set(maxWeights)];
-
+  
   useEffect(() => {
     dispatch(getDogs());
     dispatch(getTemperamentsList());
   }, [dispatch]);
 
-  function handleClick(e) {
+  function ResetFiltros(e) {
     e.preventDefault();
     dispatch(getDogs());
   }
   
-  function handleClickOrder(e) {
+  function ordenAlfabetico(e) {
     e.preventDefault();
     dispatch(orderByName(e.target.value));
   }
-  function handleClickOrderWeight(e) {
+  function orderPorPeso(e) {
     e.preventDefault();
     dispatch(orderByWeight(e.target.value));
   }
-  function handleFilterCreated(e) {
+  function FiltroCreadoEn(e) {
     dispatch(filterCreated(e.target.value));
   }
-  function handleFilteredByTemp(e) {
+  function FiltroPorTemperamento(e) {
     e.preventDefault();
     dispatch(filterDogsByTemperament(e.target.value));
   }
 
-  function handleFilteredMAXWeight(e) {
-    e.preventDefault();
-    dispatch(filterDogsByMAXWeight(e.target.value));
-  }
-  function handleFilteredMINWeight(e) {
-    e.preventDefault();
-    dispatch(filterDogsByMINWeight(e.target.value));
-  }
   return (
     <Fragment>
       <div className="ContenedorFiltros">
-        <div className="sideBarHeader">
-          <h4 className="header"> :</h4>
-          <div
-            className="tooltip"
-            onClick={(e) => {
-              handleClick(e);
-            }}>
-            <span className="material-icons refresh">Recargar</span>
-          </div>
-        </div>
-        <hr />
         <div className="filterSection">
-          {/* <h5 className="filterHeader">Order by name</h5> */}
-          <select
-            onChange={(e) => {
-              handleClickOrder(e);
-            }}
-          >
+          <select onChange={(e) => { ordenAlfabetico(e); }}>
             <option defaultValue value="all" hidden>
               Order
             </option>
@@ -86,38 +53,29 @@ export default function Filtros() {
             <option value="desc">Z - A</option>
           </select>
         </div>
-        {/* <div className="filterSection">
-          <h5 className="filterHeader">Order by weight</h5>
-          <select
-            onChange={(e) => {
-              handleClickOrderWeight(e);
-            }}
-          >
+        <div className="filterSection">
+          <select onChange={(e) => { orderPorPeso(e)}}>
             <option defaultValue value="all" hidden>
               Order
             </option>
-            <option value="asc">Heaviest 1º</option>
-            <option value="desc">Lightest 1º</option>
+            <option value="asc">Mas Pesada</option>
+            <option value="desc">Menos Pesada</option>
           </select>
-        </div> */}
+        </div>
+
         <div className="filterSection">
-          {/* <h5 className="filterHeader">Filter by source</h5> */}
           <select
-            onChange={(e) => {
-              handleFilterCreated(e);
-            }}
-          >
+            onChange={(e) => {FiltroCreadoEn(e)}}>
             <option defaultValue value="all">
-              All Sources  
+              Todos los perros  
             </option>
-            <option value="created">base  </option>
-            <option value="inDB">api  </option>
+            <option value="created">Creados</option>
+            <option value="inDB">Por api</option>
           </select>
         </div>
         <div className="filterSection">
-          {/* <h5 className="filterHeader">Filter by temperament</h5> */}
-          <select onChange={(e) => handleFilteredByTemp(e)}>
-            <option value="all">Temperaments</option>
+          <select onChange={(e) => FiltroPorTemperamento(e)}>
+            <option value="all">Temperamentos</option>
             {temperaments.map((temp) => {
               return (
                 <option value={temp} key={temp}>
@@ -129,43 +87,17 @@ export default function Filtros() {
         </div>
 
         <div className="filterSection">
-          {/* <h5 className="filterHeader">Filter by max weight</h5> */}
-          <select onChange={(e) => handleFilteredMAXWeight(e)}>
-            <option value="all">pesos</option>
-            {allDogsMaxWeights.map((maxWeight) => {
-              return maxWeight ? (
-                <option value={maxWeight} key={maxWeight}>
-                  {maxWeight} kg
-                </option>
-              ) : (
-                ""
-              );
-            })}
-          </select>
-        </div>
-        <div className="filterSection">
-          {/* <h5 className="filterHeader">Filter by min weight</h5> */}
-          <select onChange={(e) => handleFilteredMINWeight(e)}>
-            <option value="all">peso</option>
-            {allDogsMinWeights.map((minWeight) => {
-              return minWeight ? (
-                <option value={minWeight} key={minWeight}>
-                  {minWeight} kg
-                </option>
-              ) : (
-                ""
-              );
-            })}
-          </select>
-        </div>
-        <div className="filterSection">
-          {/* <h5 className="filterHeader">Add a Woof</h5> */}
-          <div className="addDog">
-            <Link to="/newDog/" className="tooltip">
+
+            <Link to="/newDog/" className="AggPerro">
               <span className="tooltiptext">Crear perro</span>
             </Link>
-          </div>
+      
         </div>
+        <div
+            className="AggPerro2"
+            onClick={(e) => {ResetFiltros(e)}}>
+            <span className="material-icons refresh">Refresh</span>
+          </div>
       </div>
     </Fragment>
   );

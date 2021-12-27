@@ -21,16 +21,8 @@ export default function DogCard( { id, name, image, temperament, weight,height, 
               </div>
               <div className="tempArea">
                   <h5 className="dogTemp">{temperament}</h5>
-                  <h5 className="dogTemp">weight {weight}</h5>
-                  <h5 className="dogTemp">Heigt {height}</h5>
-                  <h5 className="dogTemp">hola {createdInDB}</h5>
-
-
-
-
-                 
+                  <h5 className="dogWeight">Peso: {weight}</h5>
               </div>
-             
             </div>
           </Link>
         </div>

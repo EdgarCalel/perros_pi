@@ -46,7 +46,7 @@ export function filterDogsByMINWeight(payload) {
 
 export function getDogsByName(name) {
     return async function (dispatch) {
-        const { data } = await axios.get(`${REACT_APP_SERVER}/dogs/${name}`);
+        const { data } = await axios.get(`${REACT_APP_SERVER}/dogsName/${name}`);
         return dispatch({
             type: "GET_DOGS_BY_NAME",
             payload: data
@@ -96,7 +96,7 @@ export function filterCreated(payload) {
 export function getDetails(id) {
     return async function (dispatch) {
         try {
-            var json = await axios.get(`${REACT_APP_SERVER}/dogs/${id}`)
+            var json = await axios.get(`${REACT_APP_SERVER}/dogsi/${id}`)
             return dispatch({
                 type: 'GET_DETAILS',
                 payload: json.data
@@ -105,12 +105,4 @@ export function getDetails(id) {
             console.log(error)
         }
     }
-}
-
-export function deleteDetails() {
-    return async function (dispatch){
-    return dispatch({
-        type: 'DELETE_DETAILS'
-    })
-}
 }

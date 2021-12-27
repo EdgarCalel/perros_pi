@@ -5,18 +5,18 @@ import SearchBar from "./Search";
 export default function Navbar () {
   return (
 
-      <nav className="NavPrincipal">
-        <ul className="ulNavbar">
+      <>
           <div className="navContenido">
-          <Link to='/'>Inicio</Link>
-          <Link to='/Home'>Home</Link>
-          <Link to='/Formulario'>Crear Perro</Link>
+          <div className='iconoPerro'>
+          <img src="https://cdn-icons-png.flaticon.com/512/3636/3636172.png" alt="" width={47} />
           </div>
-<div className="searchDiv">
+          <div className="searchDiv">
 <SearchBar />
 </div>
-        </ul>
-      </nav>
+          </div>
+
+        
+      </>
 
   );
 };

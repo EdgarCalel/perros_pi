@@ -1,31 +1,52 @@
-.NavPrincipal{
- background-color: black;
- height: 8vh;
- margin: 0;
- border-bottom: tomato solid 10px;
-}
-
-.ulNavbar{
-display: flex;
- margin: 0;
- align-items: center;
- height: 100%;
-
-}
 .navContenido{
-    width: 50%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
+    background: url('https://www.xtrafondos.com/wallpapers/paisaje-digital-en-atardecer-5846.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 80px;
+border-bottom: 10px solid green;
 }
-.navContenido a{
-    color: white;
+.iconoPerro{
+    margin-right: 10px;
+}
+.search{
+    display: flex;
+}
+.search input {
+    background-color: transparent;
+    outline: none;
+border: none;
+color: white;
+font-weight: bold;
+font-size: 1.5rem;
+font-family:cursive;
+width: 200px;
+}
+
+.busquedaBtn{
+border-radius: 20px;
+}
+
+
+ .busquedaBtn {background-image: linear-gradient(to right, #1D976C 0%, #93F9B9  51%, #1D976C  100%)}
+ .busquedaBtn {
+    margin: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 50px;
+    display: block;
+  }
+
+  .busquedaBtn:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
     text-decoration: none;
-
-}
-.searchDiv{
-    width: 50%;
-    display: flex;
-    justify-content: right;
-
-}
-
+  }
+ 

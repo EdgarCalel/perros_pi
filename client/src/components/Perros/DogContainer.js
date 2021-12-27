@@ -13,7 +13,7 @@ export default function DogContainer() {
   const [dogsPerPage] = useState(8);
   const indexOfLastDog = currentPage * dogsPerPage;
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
-  const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog);
+  const currentDogs = allDogs?.slice(indexOfFirstDog, indexOfLastDog);
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -42,20 +42,14 @@ export default function DogContainer() {
             name={el.name}
             image={el.image}
             createdInDB={el.createdInDB?'base dtos':'nada'}
-            height={el.height?el.height:el.height_min +'-'+el.height_max}
-            weight={el.weight?el.weight: el.weight_min +'-'+el.weight_max}
-            temperament={el.temperament?el.temperament:el.Temperamentos.map((el=>el.name+" "))}
+            height={el.height?el?.height:el?.height_min +'-'+el?.height_max}
+            weight={el.weight?el?.weight: el?.weight_min +'-'+el?.weight_max}
+            temperament={el?.temperament?el?.temperament:el.Temperamentos?.map((el=>el?.name+" "))}
             // temperaments={el.temperamentos}
           />
         )})}
                   <div className="Paginacion" ></div>
 
-         <Pagination
-          dogsPerPage={dogsPerPage}
-          allDogs={allDogs.length}
-          pagination={pagination}
-          currentPage={currentPage}
-        />
       </div>
     </Fragment>
   );

@@ -42,7 +42,7 @@ module.exports = (sequelize) => {
     image:{
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: 'no hay imagen'
+      defaultValue: 'https://wallup.net/wp-content/uploads/2014/10/animal/Music_Dog-748x748.jpg'
     },
     createdInDB: {
       type: DataTypes.BOOLEAN,

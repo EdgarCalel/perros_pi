@@ -57,38 +57,20 @@ function rootReducer(state = initialState, action) {
         case 'ORDER_BY_WEIGHT':
             const sortedWeight = action.payload === 'asc' ?
                 [...state.dogs].sort(function (a, b) {
-                    if(a.weight_min === null) { return 0 }
-                    if (a.weight_min < b.weight_min) { return 1 }
-                    if (b.weight_min < a.weight_min) { return -1 }
+                    if(a.weight_max === null) { return 0 }
+                    if (a.weight_max < b.weight_max) { return 1 }
+                    if (b.weight_max < a.weight_max) { return -1 }
                     return 0;
                 }) :
                 [...state.dogs].sort(function (a, b) {
-                    if(a.weight_min === null) { return 0 }
-                    if (a.weight_min < b.weight_min) { return -1; }
-                    if (b.weight_min < a.weight_min) { return 1; }
+                    if(a.weight_max === null) { return 0 }
+                    if (a.weight_max < b.weight_max) { return -1; }
+                    if (b.weight_max < a.weight_max) { return 1; }
                     return 0;
                 })
             return {
                 ...state,
                 allDogs: sortedWeight
-            }
-        case 'FILTER_BY_MAX_WEIGHT':
-            const everyDog = state.allDogs
-            const weightMAXFiltered = action.payload === 'all' ?
-                everyDog :
-                everyDog.filter(el => el.weight_max <= action.payload)
-            return {
-                ...state,
-                allDogs: weightMAXFiltered
-            }
-        case 'FILTER_BY_MIN_WEIGHT':
-            const allDoguis = state.allDogs
-            const weightMINFiltered = action.payload === 'all' ?
-                allDoguis :
-                allDoguis.filter(el => el.weight_min >= action.payload)
-            return {
-                ...state,
-                allDogs: weightMINFiltered
             }
         case 'POST_DOG':
             return {
@@ -99,14 +81,11 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 details: action.payload
             }
-        case 'DELETE_DETAILS':
-            return{
-                ...state,
-                details: []
-            }
         default:
             return state
     }
 }
+
+
 
 export default rootReducer;

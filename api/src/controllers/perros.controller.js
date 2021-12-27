@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { Dog, Temperamento} = require('../db')
+const { Dog, Temperamento, Diet, Recipe} = require('../db')
 
 const PerrobyApi = async (req, res)=>{
   try {
@@ -17,7 +17,9 @@ const PerrobyApi = async (req, res)=>{
         weight_max: parseInt(ed.weight.metric.slice(4).trim()),
         height_min: parseInt(ed.height.metric.slice(0, 2).trim()),
         height_max: parseInt(ed.height.metric.slice(4).trim()),
-      
+        life_span: ed.life_span,
+        height: ed.height.metric
+
       }
     })
   return infoApi
@@ -26,27 +28,36 @@ const PerrobyApi = async (req, res)=>{
   }
 };
 const DogByName = async (req, res)=>{
-    const { name } =req.params;
-      const Urlapi = await axios(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
-      const  infoApi = await Urlapi.data.map(ed =>{
-        return{
-          id: ed.id,
-          name: ed.name,
-          temperament: ed.temperament,
-          weight: ed.weight.imperial,
-          height: ed.height.imperial,
-          image : ed.image.url,
-          life_span: ed.life_span
-        }
-      })
-  
-      let findDogs = await infoBD();
-      const BdFiltName = findDogs.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
+  const { name } =req.params;
+    // const Urlapi = await axios(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
+    //   const  infoApi = await Urlapi.data.map(ed =>{
+    //     return{
+    //       id: ed.id,
+    //       name: ed.name,
+    //       temperament: ed.temperament,
+    //       weight: ed.weight.imperial,
+    //       height: ed.height.imperial,
+    //       image: ed.image ?ed.image: 'no tiene imagen',
+    //       life_span: ed.life_span
+    //     }
+    // /  })
+    // hola
+//     const ApiInfo =PerrobyApi();
+//     const findApi = await ApiInfo.data.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
+//       let findDogs = await infoBD();
+//       const BdFiltName = findDogs.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
+// let findImage = await PerrobyApi();
 
-      const Result = infoApi.concat(BdFiltName)  
-      Result.length? res.status(200).json(Result): res.json('No se tiene al perro ingresado')
+//       const Result = findApi.concat(BdFiltName)  
+const dogTotal = await JoinApiBd();
+if (name) {
+  let dogName = await dogTotal.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
+  dogName.length?
+    res.status(200).json(dogName):
+    res.status(500).json({message: "No se pudo encontraron datos del HORARIO_DIA.",data: [],});
   
-};
+  }};
+
 const infoBD = async ()=>{
 return await Dog.findAll({
     include:{
@@ -57,20 +68,36 @@ return await Dog.findAll({
       },
     }
   })
-  
+
+
+
 }
 const JoinApiBd = async ()=>{
   const infoApi = await PerrobyApi();
   const infoBd = await infoBD();
-  const infoTotal = infoApi.concat(infoBd);
+ const infoBdMap= await infoBd.map((el)=>{
+    return{
+      id: el.id,
+      name: el.name, 
+      height_min: el.height_min,
+      height_max: el.height_max,
+      weight_min: el.weight_min,
+      weight_max: el.weight_max,
+      life_span: el.life_span,
+      image: el.image,
+       temperament: el.Temperamentos.map(el=>el.name).join(', '),
+      createdInDB: el.createdInDB
+    }
+  })
+  const infoTotal = infoApi.concat(infoBdMap);
   return infoTotal
-}               
-const findAll = async (req, res)=>{
+}     
 
+const findAll = async (req, res)=>{
 let findDogs = await JoinApiBd();
   res.status(200).send(findDogs) 
-
 }
+
 const findId = async (req, res) => {
 const { id } = req.params;
 // const  id  = req.params.id
@@ -82,13 +109,17 @@ if (id) {
     res.status(200).json(dogId):
     res.status(404).send('No se encontro el perro que buscaba')
 }}
+
+
 const CreateDog = async (req, res) =>{
-  const { name, height_min,
+  const { 
+    name, 
+    height_min,
     height_max,
     weight_min,
     weight_max,
     life_span,
-  temperamentoB }= req.body;
+  temperament }= req.body;
   const dogNew = await Dog.create({
     name, 
     height_min, 
@@ -98,7 +129,7 @@ const CreateDog = async (req, res) =>{
     life_span })
   
   let temperamentoIn = await Temperamento.findAll({
-    where: { name:temperamentoB}
+    where: { name:temperament}
   })
   dogNew.addTemperamento(temperamentoIn);
 res.send('Ha Creado con exito el perro')
@@ -138,4 +169,15 @@ const filterTemperament = async (req, res)=>{
 //   //})
 // }
 
-module.exports = { PerrobyApi, infoBD, findAll, findId, CreateDog, DogByName, filterTemperament, deletePerro}
+const CrearReceta = async (req, res) => {
+  const { title, summary, spoonacularScore, healthScore, steps, img, DietB } = req.body;
+  
+  const newRecipe = await Recipe.create({title, summary, spoonacularScore, healthScore, steps, img});
+  const DietIn = await Diet.findAll({
+      where: { name: DietB}
+  })
+  newRecipe?.addDiet(DietIn);
+  res.status(200).send("Has creado la receta con exito!")
+}
+
+module.exports = { PerrobyApi, infoBD, findAll, findId, CreateDog, DogByName, filterTemperament, deletePerro, CrearReceta}

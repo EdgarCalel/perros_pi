@@ -7,13 +7,11 @@ export default function Pagination({dogsPerPage, allDogs, pagination, currentPag
         pageNumbers.push(i)
     }
     return(
-        <nav>
-            <ul className="crumbs">
-                {
-                    pageNumbers&&
-                    pageNumbers.map(number => (
-                        <li className="number" key={number}>
-                            <div  onClick={()=> pagination(number)}>{number}</div>
+        <nav className='totalConsumo'>
+            <ul className="ulLista">
+                { pageNumbers?.map(number => (
+                        <li className="Numeros" key={number} onClick={()=> pagination(number)}>
+                            {number}
                         </li>
                     ))
                 }

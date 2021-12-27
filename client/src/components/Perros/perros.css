@@ -14,10 +14,76 @@
     
 }
 
-/* filtros */
-.ContenedorFiltros{
-  /* background-color: black; */
-  width: 100vw;
-  color: black;
-  display: flex;
-}
+.filterSection select {background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)}
+.filterSection select {
+   margin: 10px;
+   padding: 5px 1px;
+   width: 200px;
+   height: 50px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 60px;
+   display: block;
+ }
+
+ .filterSection select:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+   
+ }
+ .filterSection select option{
+color: black;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,117,121,1) 35%, rgba(0,212,255,1) 100%);
+ }
+
+
+
+
+.AggPerro {background-image: linear-gradient(to right, #003fab 0%, #13ffd4c7  51%, #43C6AC  100%)}
+.AggPerro {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 40px;
+   display: block;
+   border: 2px solid gray;
+ }
+
+ .AggPerro:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+.AggPerro2 {background-image: linear-gradient(to right, #000000 0%, #ffffffc7  51%, #c64394  100%)}
+.AggPerro2 {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 40px;
+   display: block;
+   border: 2px solid gray;
+ }
+
+ .AggPerro2:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+ .filterSection select option{
+ border-radius: 20px;
+ }

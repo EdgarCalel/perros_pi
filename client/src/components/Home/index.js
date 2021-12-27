@@ -11,9 +11,16 @@ export default function Home() {
   return (
     <Fragment>
         <NavBar />
-      <div >
-        <Filtros />
+      <div className="contenedor" >
+      <div className="filtrosP">
+          <Filtros />
+      </div>
+      <div className="ContenidoP">  
         <DogArea />
+        </div>
+
+      
+    
       </div>
     </Fragment>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDogsByName } from "../../actions";
-
+import './navbar.css'
 export default function SearchBar() {
   const [dogState, setDogsState] = useState("");
   const dispatch = useDispatch();
@@ -14,19 +14,20 @@ export default function SearchBar() {
     } else {
       dispatch(getDogsByName(dogState));
       setDogsState("");
+      // alert(dispatch.message);
     }
   }
 
   return (
-    <div >
+    <div className="search" >
       <input
         type="text"
         placeholder="Search a dog..."
         value={dogState}
         onChange={(e) => setDogsState(e.target.value)}
       />
-      <button type="submit" onClick={handleClick}>
-        <span >search</span>
+      <button className="busquedaBtn"  type="submit" onClick={handleClick}>
+        <span  >search</span>
       </button>
     </div>
   );

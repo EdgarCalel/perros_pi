@@ -6,15 +6,17 @@ const { JoinApiBd } = require('./perros.controller')
 const findDogTemperament = async (req, res) => {
   try {
     const temperamentApi = await axios.get('https://api.thedogapi.com/v1/breeds');
-      let temperamentex = await temperamentApi.data.map(d => d.temperament ? d.temperament : "no se tiene temperamento");
-      let temp2 =temperamentex.map(d => d.split(', '))
-      temp2.forEach(el => {
-       
-          if (el){ Temperamento.findOrCreate({
-            where: { name: el }})}
+      let temperamentex = await temperamentApi?.data?.map(d => d.temperament ? d.temperament : "no se tiene temperamento");
+      let temp2 =temperamentex?.map(d => d?.split(', '))
+      const formal = temp2.flat()
+      // res.json(formal)
+      formal?.forEach(tel => {
+     
+          if (tel) Temperamento.findOrCreate({
+            where: { name: tel }})
     
       });
-      temperamentoBd = await Temperamento.findAll();
+     const temperamentoBd = await Temperamento.findAll();
       res.status(200).json(temperamentoBd);
   } catch (error) {
       res.status(404).send('No se tiene respuesta a su solicitud' + error)

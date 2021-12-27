@@ -3,9 +3,9 @@ import { BrowserRouter as Router,
   Routes} from "react-router-dom";
   import Landing from './components/LandingPage/inicio';
   import Home from './components/Home/index'
-// import Perros from './components/Perros/';
+import DogsDetails from './components/Perros/DogDetalle';
 // import MainHeader from './components/navbar/navbar'
-import Formulario from './components/Perros/formulario';
+import Formulario from './components/Perros/CrearPerro';
 import Error from './components/error';
 
 function App() {
@@ -16,7 +16,8 @@ function App() {
   <Routes>
     <Route index exact path='/' element={<Landing />} />
     <Route exact path='/Home' element={<Home />} />
-    <Route exact path='/Formulario' element={<Formulario />} />
+    <Route exact path='/newDog' element={<Formulario />} />
+    <Route  path='/dogs/:id' element={<DogsDetails />} />
     <Route exact path='*' element={<Error />} />
   </Routes>
 </Router>
