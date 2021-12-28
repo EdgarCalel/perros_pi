@@ -22,6 +22,7 @@ export default function DogContainer() {
     dispatch(getDogs());
   }, [dispatch]);
 
+  
   return (
     <Fragment>
      <div className="DogContainer">
