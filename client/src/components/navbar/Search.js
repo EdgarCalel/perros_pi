@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDogsByName } from "../../actions";
 import './navbar.css'
+
 export default function SearchBar() {
   const [dogState, setDogsState] = useState("");
   const dispatch = useDispatch();
@@ -10,10 +11,12 @@ export default function SearchBar() {
     e.preventDefault();
     
     if (dogState.length === 0) {
-      return alert("Please input a name to start the search");
+      return alert("Ingrese un nombre de perro");
     } else {
+      debugger
       dispatch(getDogsByName(dogState));
       setDogsState("");
+      debugger
       // alert(dispatch.message);
     }
   }

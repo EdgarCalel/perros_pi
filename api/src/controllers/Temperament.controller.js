@@ -1,6 +1,5 @@
 const axios = require('axios')
 const { Dog, Temperamento } = require('../db');
-const { JoinApiBd } = require('./perros.controller')
 
 
 const findDogTemperament = async (req, res) => {
@@ -11,10 +10,8 @@ const findDogTemperament = async (req, res) => {
       const formal = temp2.flat()
       // res.json(formal)
       formal?.forEach(tel => {
-     
           if (tel) Temperamento.findOrCreate({
             where: { name: tel }})
-    
       });
      const temperamentoBd = await Temperamento.findAll();
       res.status(200).json(temperamentoBd);
@@ -23,23 +20,12 @@ const findDogTemperament = async (req, res) => {
   }
 }
 
-
 const TemperamentoList = async (req,res)=>{
   temperamentoBda = await Temperamento.findAll();
   res.status(200).json(temperamentoBda);
 }
 
-const ByTemperament = async (req, res)=>{
-  const temperaments = req.query.temperaments;
-  const everyDog = await JoinApiBd();
-  const dogSearchResult = everyDog.filter((dog) => {
-      if (temperament === 'all') return everyDog
-      else if (dog.temperament) {
-          return (dog.temperament.toLowerCase()).includes(temperaments.toLowerCase())
-      }
-  });
-  res.status(200).json(dogSearchResult)
-}
+
 
  const CreateTemperamento = async (req, res) =>{
   const { name }= req.body;
@@ -49,4 +35,4 @@ const ByTemperament = async (req, res)=>{
   // dogNew.addTemperamento(temperamentoIn);
 res.send('Ha Creado con exito el temperamento')
 }
-module.exports = { findDogTemperament,TemperamentoList, CreateTemperamento,ByTemperament }
+module.exports = { findDogTemperament,TemperamentoList, CreateTemperamento }

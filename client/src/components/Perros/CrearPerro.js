@@ -2,34 +2,32 @@ import React, { useState, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link} from "react-router-dom";
 import { postDog, getTemperamentsList } from "../../actions/index";
+import './perros.css'
 
 function validateForm(input) {
   let errors = {};
-
-  // NAME
+  
   if (!input.name) {errors.name = "Tienes que colocar un nombre";
+  
   } else {errors.name = "";}
 
-  // WEIGHTS
   if (!input.weight_min) {
-    // weight min
+    
     errors.weight_min = "el peso tiene que ser numero";
   } else if (!/\d{1,2}/gi.test(input.weight_min)) {
+    
     errors.weight_min = "el minimo tiene que ser 25";
   } else {
     errors.weight_min = "";
   }
   if (!input.weight_max) {
-    // weight max
     errors.weight_max = "Tiene que ser un numero";
   } else if (!/\d{1,2}/gi.test(input.weight_max)) {
     errors.weight_max = "El peso tiene que tener un valor maximo";
   } else {
     errors.weight_max = "";
   }
-  // HEIGHTS
   if (!input.height_min) {
-    // height min
     errors.height_min = "Escriba un numero de altura";
   } else if (!/\d{1,2}/gi.test(input.height_min)) {
     errors.height_min = "La altura debe tener un valor minimo";
@@ -37,7 +35,6 @@ function validateForm(input) {
     errors.height_min = "";
   }
   if (!input.height_max) {
-    // height max
     errors.height_max = "Escribe la altura";
   } else if (!/\d{1,2}/gi.test(input.height_max)) {
     errors.height_max = "Tienes que colocar una altura maxima";
@@ -54,17 +51,17 @@ export default function DogCreation() {
       if (a < b) return -1;
       else return 1;
     }
-  );;
+  );
   const [errors, setErrors] = useState({});
 
   const [input, setInput] = useState({
-    name: "",
-    image:"",
-    height_min: "",
-    height_max: "",
-    weight_min: "",
-    weight_max: "",
-    life_span: "",
+    name: '',
+    image:'',
+    height_min: '',
+    height_max: '',
+    weight_min: '',
+    weight_max: '',
+    life_span: '',
     temperament: [],
   });
 
@@ -95,7 +92,7 @@ export default function DogCreation() {
     });
   }
   const ErroresValidacion=()=>{
-    debugger
+    
         if(!input.name) {alert("FALTA EL CAMPO DEL NOMBRE"); return false;}
         if(!input.weight_min) {alert("FALTA EL CAMPO DEL peso minimo"); return false;}
         return true;
@@ -105,7 +102,7 @@ export default function DogCreation() {
     e.preventDefault();
     if(ErroresValidacion()){
       if (
-        !errors.name   &&
+        !errors.name  &&
         !errors.image &&
         !errors.weight_min &&
         !errors.height_min &&
@@ -115,20 +112,19 @@ export default function DogCreation() {
         alert("Your dog has been created successfully");
         dispatch(postDog(input));
         setInput({
-          name: "",
-          image:"",
-          height_min: "",
-          weight_min: "",
-          height_max: "",
-          weight_max: "",
-          life_span: "",
+          name: '',
+          image:'',
+          height_min: '',
+          weight_min: '',
+          height_max: '',
+          weight_max: '',
+          life_span:  '',
           temperament: [],
         });
       } else {
         return alert("Faltan campos por llenar.");
       }
     }
-  
   }
 
   useEffect(() => {
@@ -137,9 +133,10 @@ export default function DogCreation() {
 
   return (
     <Fragment>
+      <div className="totoCreate">
       <div className="mainContainerCreation">
         <div>
-          <h2>Create your Woof</h2>
+          <h2>Crear nuevo perro</h2>
         </div>
         <div className="formContainer">
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -149,25 +146,24 @@ export default function DogCreation() {
                 type="text"
                 value={input.name}
                 name="name"
-                placeholder="Grand Canadian Bulldog"
+                placeholder="Escriba el nombre"
                 onChange={(e) => handleChange(e)}
               />
-              <div>
-                <p className="error">{errors.name}</p>
+              <div className="erroConte">
+                <p className="ValidadorError">{errors.name}</p>
               </div>
             </div>
             <div className="Section">
               <label>Image URL:</label>
               <input
                 type="url"
-                value={input.image}
+                value={input.image ? input.image:null}
                 name="image"
                 placeholder="http://myimageontheweb.com"
                 onChange={(e) => handleChange(e)}
               />
-            
-              <div>
-                <p className="error">{errors.image}</p>
+              <div className="erroConte">
+                <p className="ValidadorError">{errors.image}</p>
               </div>
             </div>
             <div className="Section">
@@ -180,8 +176,8 @@ export default function DogCreation() {
                 placeholder="20"
                 onChange={(e) => handleChange(e)}
               />
-              <div>
-                <p className="error">{errors.height_min}</p>
+              <div className="erroConte">
+                <p className="ValidadorError">{errors.height_min}</p>
               </div>
               <label>Max</label>
               <input
@@ -191,11 +187,10 @@ export default function DogCreation() {
                 placeholder="50"
                 onChange={(e) => handleChange(e)}
               />
-              <div>
-                <p className="error">{errors.height_max}</p>
+              <div className="erroConte">
+                <p className="ValidadorError">{errors.height_max}</p>
               </div>
             </div>
-
             <div className="Section">
               <h4>Weights</h4>
               <label>Min</label>
@@ -206,19 +201,19 @@ export default function DogCreation() {
                 placeholder="15"
                 onChange={(e) => handleChange(e)}
               />
-              <div>
-                <p className="error">{errors.weight_min}</p>
+              <div className="erroConte"> 
+                <p className="ValidadorError">{errors.weight_min}</p>
               </div>
               <label>Max</label>
               <input
                 type="number"
-                value={input.weight_max}
+                // value={input.weight_max}
                 name="weight_max"
                 placeholder="32"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
               />
-              <div>
-                <p className="error">{errors.weight_max}</p>
+              <div className="erroConte">
+                <p className="ValidadorError">{errors.weight_max}</p>
               </div>
             </div>
             <div className="Section">
@@ -262,6 +257,7 @@ export default function DogCreation() {
             </div>
           </form>
         </div>
+      </div>
       </div>
     </Fragment>
   );

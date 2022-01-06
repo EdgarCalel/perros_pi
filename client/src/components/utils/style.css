@@ -1,7 +1,7 @@
 .ulLista{
   display: flex;
   list-style: none;
-  justify-content: space-around;
+  justify-content: center;
 }
 /* .Numeros{
   border: green solid 1px;
@@ -34,3 +34,7 @@ border-radius: 5px;
    text-decoration: none;
    
  }
+.totalConsumo{
+  width: 100%;
+  justify-content: center;
+}

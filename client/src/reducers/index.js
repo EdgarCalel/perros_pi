@@ -1,9 +1,7 @@
 const initialState = {
     dogs: [],
     allDogs: [],
-    temperaments: [],
-    breeds: [],
-    details:[]
+    temperaments: []
 }
 
 function rootReducer(state = initialState, action) {
@@ -40,12 +38,12 @@ function rootReducer(state = initialState, action) {
             }
         case 'ORDER_BY_NAME':
             const sortedArr = action.payload === 'asc' ?
-                [...state.dogs].sort(function (a, b) {
+                [...state.allDogs].sort((a, b)=> {
                     if (a.name > b.name) { return 1 }
                     if (b.name > a.name) { return -1 }
                     return 0;
                 }) :
-                [...state.dogs].sort(function (a, b) {
+                [...state.allDogs].sort(function (a, b) {
                     if (a.name > b.name) { return -1; }
                     if (b.name > a.name) { return 1; }
                     return 0;
@@ -56,18 +54,8 @@ function rootReducer(state = initialState, action) {
             }
         case 'ORDER_BY_WEIGHT':
             const sortedWeight = action.payload === 'asc' ?
-                [...state.dogs].sort(function (a, b) {
-                    if(a.weight_max === null) { return 0 }
-                    if (a.weight_max < b.weight_max) { return 1 }
-                    if (b.weight_max < a.weight_max) { return -1 }
-                    return 0;
-                }) :
-                [...state.dogs].sort(function (a, b) {
-                    if(a.weight_max === null) { return 0 }
-                    if (a.weight_max < b.weight_max) { return -1; }
-                    if (b.weight_max < a.weight_max) { return 1; }
-                    return 0;
-                })
+                [...state.allDogs].sort( (a, b)=> a.weight_min -b.weight_min):
+                [...state.allDogs].sort( (a, b)=> b.weight_min -a.weight_min) 
             return {
                 ...state,
                 allDogs: sortedWeight

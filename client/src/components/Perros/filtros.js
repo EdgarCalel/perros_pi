@@ -9,7 +9,7 @@ import {
   filterCreated,
   orderByWeight
 } from "../../actions/index";
-import './perros.css'
+import './perros.css';
 
 export default function Filtros() {
   const dispatch = useDispatch();
@@ -20,14 +20,15 @@ export default function Filtros() {
     dispatch(getTemperamentsList());
   }, [dispatch]);
 
-  function ResetFiltros(e) {
-    e.preventDefault();
+  function ResetFiltros(event) {
+    event.preventDefault();
     dispatch(getDogs());
+    window.location.reload();
   }
   
-  function ordenAlfabetico(e) {
-    e.preventDefault();
-    dispatch(orderByName(e.target.value));
+  function ordenAlfabetico(event) {
+    event.preventDefault();
+    dispatch(orderByName(event.target.value));
   }
   function orderPorPeso(e) {
     e.preventDefault();
@@ -38,7 +39,9 @@ export default function Filtros() {
   }
   function FiltroPorTemperamento(e) {
     e.preventDefault();
+    debugger
     dispatch(filterDogsByTemperament(e.target.value));
+    debugger
   }
 
   return (
@@ -46,9 +49,6 @@ export default function Filtros() {
       <div className="ContenedorFiltros">
         <div className="filterSection">
           <select onChange={(e) => { ordenAlfabetico(e); }}>
-            <option defaultValue value="all" hidden>
-              Order
-            </option>
             <option value="asc">A - Z</option>
             <option value="desc">Z - A</option>
           </select>
@@ -73,9 +73,10 @@ export default function Filtros() {
             <option value="inDB">Por api</option>
           </select>
         </div>
+        
         <div className="filterSection">
           <select onChange={(e) => FiltroPorTemperamento(e)}>
-            <option value="all">Temperamentos</option>
+            <option defaultValue value="all">Temperamentos</option>
             {temperaments.map((temp) => {
               return (
                 <option value={temp} key={temp}>

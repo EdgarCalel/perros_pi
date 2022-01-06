@@ -11,18 +11,15 @@ export default function DogContainer() {
   const allDogs = useSelector((state) => state.allDogs);
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
-  const indexOfLastDog = currentPage * dogsPerPage;
-  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
-  const currentDogs = allDogs?.slice(indexOfFirstDog, indexOfLastDog);
-  const pagination = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  const indexOfLastDog = currentPage * dogsPerPage;//8
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage;//0
+  const currentDogs = allDogs?.slice(indexOfFirstDog, indexOfLastDog); //0-8
+  const pagination = (pageNumber) => {setCurrentPage(pageNumber)};
 
   useEffect(() => {
     dispatch(getDogs());
   }, [dispatch]);
 
-  
   return (
     <Fragment>
      <div className="DogContainer">
@@ -34,15 +31,16 @@ export default function DogContainer() {
         />
         <div className="Paginacion" ></div>
         {
-          
+         
           currentDogs.map((el) => { 
+         
             return  (
           <DogCard
-            key={el.id}
-            id={el.id}
-            name={el.name}
-            image={el.image}
-            createdInDB={el.createdInDB?'base dtos':'nada'}
+            key={el.id?el.id:'no se tiene'}
+            id={el.id?el.id:'no se tiene'}
+            name={el.name?el.name:'no se tiene'}
+            image={el.image?el.image:'no se tiene'}
+            createdInDB={el.createdInDB?el.createdInDB:'nada'}
             height={el.height?el?.height:el?.height_min +'-'+el?.height_max}
             weight={el.weight?el?.weight: el?.weight_min +'-'+el?.weight_max}
             temperament={el?.temperament?el?.temperament:el.Temperamentos?.map((el=>el?.name+" "))}

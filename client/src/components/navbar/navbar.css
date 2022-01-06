@@ -5,8 +5,11 @@
     background: url('https://www.xtrafondos.com/wallpapers/paisaje-digital-en-atardecer-5846.jpg');
 background-size: cover;
 background-repeat: no-repeat;
-height: 80px;
+height: 60px;
 border-bottom: 10px solid green;
+position: fixed;
+width: 100%;
+z-index: 101;
 }
 .iconoPerro{
     margin-right: 10px;

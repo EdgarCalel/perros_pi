@@ -11,39 +11,21 @@ export function orderByName(payload) {
         payload
     }
 }
-
 export function orderByWeight(payload) {
     return {
         type: 'ORDER_BY_WEIGHT',
         payload
     }
 }
-
-
 export function getDogs() {
     return async function (dispatch) {
         var json = await axios.get(`${REACT_APP_SERVER}/dogs`)
         return dispatch({
             type: 'GET_DOGS',
-            payload: json.data
+            payload: json.data,
         })
     }
 }
-
-export function filterDogsByMAXWeight(payload) {
-    return {
-        type: 'FILTER_BY_MAX_WEIGHT',
-        payload
-    }
-}
-
-export function filterDogsByMINWeight(payload) {
-    return {
-        type: 'FILTER_BY_MIN_WEIGHT',
-        payload
-    }
-}
-
 export function getDogsByName(name) {
     return async function (dispatch) {
         const { data } = await axios.get(`${REACT_APP_SERVER}/dogsName/${name}`);
@@ -66,7 +48,7 @@ export function getTemperamentsList() {
 }
 
 export function postDog(payload) {
-    return async function (dispatch) {
+    return async function () {
         const response = await axios.post(`${REACT_APP_SERVER}/dogs`, payload);
         return response;
     }
@@ -75,7 +57,7 @@ export function postDog(payload) {
 export function filterDogsByTemperament(payload) {
     return async function (dispatch) {
         try {
-            var json = await axios.get(`${REACT_APP_SERVER}/temperamentoFilter/?temperaments=${payload}`);
+            var json = await axios.get(`${REACT_APP_SERVER}/temperamentoFilter/?temperament=${payload}`);
             return dispatch({
                 type: 'GET_DOGS_BY_TEMP',
                 payload: json.data
@@ -85,7 +67,6 @@ export function filterDogsByTemperament(payload) {
         }
     }
 }
-
 export function filterCreated(payload) {
     return {
         type: 'FILTER_CREATED',

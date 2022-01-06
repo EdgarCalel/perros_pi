@@ -8,8 +8,8 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 // importaciones
-const { findAll, findId, CreateDog, DogByName, filterTemperament, deletePerro, CrearReceta } = require('../controllers/perros.controller');
-const { findDogTemperament, TemperamentoList, CreateTemperamento, ByTemperament } = require('../controllers/Temperament.controller');
+const { findAll, findId, CreateDog, DogByName, deletePerro,ByTemperament,perroPromesa } = require('../controllers/perros.controller');
+const { findDogTemperament, TemperamentoList, CreateTemperamento } = require('../controllers/Temperament.controller');
 const { platfomrs,callRecipeApi }= require('../controllers/platfoms.js')
 const Dog = require('../models/Dog');
 
@@ -26,10 +26,9 @@ router.post('/dogs', CreateDog)
 router.get('/temperaments', findDogTemperament)
 router.get('/receta', callRecipeApi)
 router.get('/temperamentos', TemperamentoList)
-router.get('/temperamentoFilter/', filterTemperament)
+router.get('/temperamentoFilter', ByTemperament)
 router.get('/temperamentCreate', CreateTemperamento)
 router.delete('/dogs/:namedelete', deletePerro)
-router.post('/RecetaCreate', CrearReceta)
 
 //router.get('/platfomrs', platfomrs)
 
