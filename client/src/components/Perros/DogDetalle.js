@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {  getDetails } from "../../actions/index";
+import {  getDetails, LimpiarDetail} from "../../actions/index";
 import './detalle.css'
 
 
@@ -12,6 +12,7 @@ export default function DogDetail(props) {
 
   useEffect(() => {
     dispatch(getDetails(id))
+    return()=>{dispatch(LimpiarDetail())}
   },[dispatch, id]);
 
   const myDog = useSelector((state) => state.details);
@@ -85,7 +86,9 @@ export default function DogDetail(props) {
                 </div>
               )
             } )
-        ): (<p style={{fontSize:"8rem"}}>loading</p>)}
+        ): (
+          <p style={{fontSize:"8rem"}}>loading</p>)
+          }
 
       
 

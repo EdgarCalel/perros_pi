@@ -3,8 +3,7 @@ const { Dog, Temperamento} = require('../db')
 
 const perroPromesa =(req, res)=>{
    axios.get('https://api.thedogapi.com/v1/breeds')
-   .then(respuestaapi => {
-       const dataPerro = respuestaapi.data.map(ed=>{
+   .then(respuestaapi => {respuestaapi.data.map(ed=>{
         return{
                id: ed.id,
                name: ed.name,
@@ -16,7 +15,8 @@ const perroPromesa =(req, res)=>{
                image: ed.image.url ?ed.image.url: 'no tiene imagen',
                temperament: ed.temperament ? ed.temperament : 'se desconoce su temperemanto'
         }})
-        return dataPerro})
+       })
+       .then(response=>response)
   .then(response=>{res.status(200).json(response)})
    .catch(error => {
      res.status(404).json(error)
@@ -73,10 +73,10 @@ try {
   if (name) {
     let dogName = await dogTotal.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
    dogName.length ?
-   res.status(200).json(dogName)  : 
-   res.json({message: "No se encontro datos de su perro."})
+   res.json(dogName)  : 
+   res.status(404).json('no hay info')
 } }catch (error) {
-  res.status(500).json({message: "se tuvo un problema en la conexion.",data: [],});
+  res.json({message: "se tuvo un problema en la conexion."});
    
   }};
 const infoBD = async ()=>{
@@ -125,7 +125,7 @@ const ByTemperament = async (req, res)=>{
           return (dog.temperament.toLowerCase()).includes(temperament?.toLowerCase())
       }
   });
-  res.status(200).json( )
+  res.status(200).json( dogSearchResult)
 }
 const findAll = async (req, res)=>{
   try {

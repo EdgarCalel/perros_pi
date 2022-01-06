@@ -78,12 +78,19 @@ export default function DogCreation() {
     );
   }
 
+ 
   function handleSelect(e) {
-    setInput({
-      ...input,
-      temperament: [...input.temperament, e.target.value],
-    });
-  }
+    if(input.temperament.includes(e.target.value)){
+      return null
+    }else{
+        setInput({
+       ...input,
+       temperament: [...input.temperament, e.target.value],
+     });
+    }
+     
+   
+   }
 
   function handleDelete(el) {
     setInput({
@@ -240,7 +247,7 @@ export default function DogCreation() {
               <div className="sidebar_box">
                 <h4>You have selected that:</h4>
                 {input.temperament.map((el) => (
-                  <div key={el} className="selectedItems">
+                  <div     key={el} className="selectedItems">
                     <p>{el}</p>
                     <button onClick={() => handleDelete(el)}>x</button>
                   </div>

@@ -13,6 +13,7 @@ const { findDogTemperament, TemperamentoList, CreateTemperamento } = require('..
 const { platfomrs,callRecipeApi }= require('../controllers/platfoms.js')
 const Dog = require('../models/Dog');
 
+
 // Routes
 // perros
 router.get('dogs', async (req, res) =>{})

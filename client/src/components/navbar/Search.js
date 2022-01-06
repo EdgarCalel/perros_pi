@@ -13,10 +13,10 @@ export default function SearchBar() {
     if (dogState.length === 0) {
       return alert("Ingrese un nombre de perro");
     } else {
-      debugger
+    
       dispatch(getDogsByName(dogState));
       setDogsState("");
-      debugger
+     
       // alert(dispatch.message);
     }
   }

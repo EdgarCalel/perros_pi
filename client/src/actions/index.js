@@ -87,3 +87,8 @@ export function getDetails(id) {
         }
     }
 }
+export function LimpiarDetail(){
+    return{
+        type: 'LIMPIAR_DETAILS',
+    }
+}
