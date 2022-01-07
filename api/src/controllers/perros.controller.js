@@ -246,7 +246,7 @@ const descriptionT = {
 }
 arrglo.push(descriptionT) 
 
-const  arrglo =[]
+const  arrglo =[]g
 
 const totohola = arrglo.concat(toto2)
 if (id) {
