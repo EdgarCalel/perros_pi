@@ -1,5 +1,5 @@
 import './style.css'
-
+                                    //8             []      
 export default function Pagination({dogsPerPage, allDogs, pagination, currentPage}) {
     const pageNumbers = []
 

@@ -87,8 +87,15 @@ export function getDetails(id) {
         }
     }
 }
+
 export function LimpiarDetail(){
     return{
         type: 'LIMPIAR_DETAILS',
+    }
+}
+export function ByTemperamento(temperament){
+    return{
+        type: 'BY_TEMPERAMENTO',
+        payload:temperament
     }
 }

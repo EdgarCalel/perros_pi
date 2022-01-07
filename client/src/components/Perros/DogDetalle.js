@@ -86,9 +86,14 @@ export default function DogDetail(props) {
                 </div>
               )
             } )
-        ): (
-          <p style={{fontSize:"8rem"}}>loading</p>)
-          }
+        ): <>
+       
+        <div className="loadingConten">
+        <img className="imgLoading" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d1ebb964207531.5bdf0775b5d96.gif" alt="" />
+        <h1>......loading</h1>
+          </div>
+       
+          </> }
 
       
 

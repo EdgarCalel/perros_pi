@@ -138,6 +138,32 @@ margin: 10px;
   justify-content: center;
 }
 
-.Section{
 
+.contenedorTempera,
+.contenedorTempera::before,
+.contenedorTempera::after {
+  margin-left: 20px;
+  padding: 10px;
+  border-radius: 60px;
+  background-color: rgba(101, 145, 234, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 22px rgba(36, 0, 0, 0.996);
+  text-align: center;
+  color: rgb(23, 1, 50);
 }
+ .contenedorTempera .toto{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+ }
+ .selectedItems{
+   display: flex;
+   margin: 5px;
+   align-items: center;
+ }
+ .selectedItems button{
+   border-radius: 50px;
+   height: 20px;
+   margin: 10px;
+ }

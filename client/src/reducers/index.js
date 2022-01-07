@@ -2,7 +2,8 @@ const initialState = {
     dogs: [],
     allDogs: [],
     temperaments: [],
-    details:[]
+    details:[],
+    holaCosa:[]
 }
 
 function rootReducer(state = initialState, action) {
@@ -36,6 +37,12 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 allDogs: createdFilter,
+            }
+        case 'BY_TEMPERAMENTO':
+            const byName = state.dogs.filter(el =>el.temperament.includes(action.payload))
+            return{
+                ...state,
+                holaCosa: byName
             }
         case 'ORDER_BY_NAME':
             const sortedArr = action.payload === 'asc' ?

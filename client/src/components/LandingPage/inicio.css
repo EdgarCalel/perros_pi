@@ -1,6 +1,14 @@
 .fondo{
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
  height: 100vh;
  background: url('https://s1.1zoom.me/big0/161/348485-admin.jpg');
 background-size: cover;
+font-size: 2rem;
+font-family: cursive;
+}
+.fondo img{
+  border-radius: 1000px;
+  width: 100px;
 }

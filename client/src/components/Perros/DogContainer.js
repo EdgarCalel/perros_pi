@@ -11,9 +11,9 @@ export default function DogContainer() {
   const allDogs = useSelector((state) => state.allDogs);
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
-  const indexOfLastDog = currentPage * dogsPerPage;//8
-  const indexOfFirstDog = indexOfLastDog - dogsPerPage;//0
-  const currentDogs = allDogs?.slice(indexOfFirstDog, indexOfLastDog); //0-8
+  const indexOfLastDog = currentPage * dogsPerPage;
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
+  const currentDogs = allDogs?.slice(indexOfFirstDog, indexOfLastDog); 
   const pagination = (pageNumber) => {setCurrentPage(pageNumber)};
 
   useEffect(() => {

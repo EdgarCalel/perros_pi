@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Dog, Temperamento} = require('../db')
+const { Dog, Temperamento, Videogame, Genre} = require('../db')
 
 const perroPromesa =(req, res)=>{
    axios.get('https://api.thedogapi.com/v1/breeds')
@@ -47,49 +47,29 @@ const PerrobyApi = async (req, res)=>{
   }
 };
 const DogByName = async (req, res)=>{
-  const { name } =req.params;
-    // const Urlapi = await axios(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
-    //   const  infoApi = await Urlapi.data.map(ed =>{
-    //     return{
-    //       id: ed.id,
-    //       name: ed.name,
-    //       temperament: ed.temperament,
-    //       weight: ed.weight.imperial,
-    //       height: ed.height.imperial,
-    //       image: ed.image ?ed.image: 'no tiene imagen',
-    //       life_span: ed.life_span
-    //     }
-    // /  })
-    // hola
-//     const ApiInfo =PerrobyApi();
-//     const findApi = await ApiInfo.data.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
-//       let findDogs = await infoBD();
-//       const BdFiltName = findDogs.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
-// let findImage = await PerrobyApi();
-
-//       const Result = findApi.concat(BdFiltName)  
+  const { name } =req.params;  
 const dogTotal = await JoinApiBd();
 try {
   if (name) {
-    let dogName = await dogTotal.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
+    
+    // let dogName = await dogTotal.filter(d=>d.name.toLowerCase().includes(name.toLowerCase()))
+    let dogName = await dogTotal.filter(d=>d.temperament.toLowerCase().includes(name.toLowerCase()))
    dogName.length ?
    res.json(dogName)  : 
    res.status(404).json('no hay info')
 } }catch (error) {
   res.json({message: "se tuvo un problema en la conexion."});
-   
-  }};
+}};
+
 const infoBD = async ()=>{
-
-
-return await Dog.findAll({
-    include:{
-      model: Temperamento,
+return await Videogame.findAll({
+    include:[{
+      model: Genre,
       attributes:['name'],
                 through:{ 
         attributes:[],
       },
-    }
+    },]
   })
 }
 const JoinApiBd = async ()=>{
@@ -107,12 +87,12 @@ const JoinApiBd = async ()=>{
       weight_max: el.weight_max,
       life_span: el.life_span,
       image: el.image?el.image:'https://s3-us-west-2.amazonaws.com/melingoimages/Images/27866.jpg',
-      temperament: el.Temperamentos.map(el=>el.name).join(', ')
+      temperament: el.Temperamentos.map(el=>el.name).join()
 
     }
   })
   const infoTotal = [...infoApi, ...infoBdMap];
-  // const infoTotal = infoApi.concat(infoBdMap);
+  
   return infoTotal
 }     
 
@@ -139,8 +119,7 @@ const findAll = async (req, res)=>{
 
 const findId = async (req, res) => {
 const { id } = req.params;
-// const  id  = req.params.id
-// res.json(id)
+
     const dogTotal = await JoinApiBd();
 if (id) {
   let dogId = await dogTotal.filter(el => el.id == id)
@@ -196,22 +175,98 @@ const filterTemperament = async (req, res)=>{
   res.status(200).json({message :'Se ha elimanado el perro con nombre: '+ Eliminar.name})
   }
 
-// const CreateDog = async (req, res) => {
-//     const { name, height, weight,temperamentoB, life_span } = req.body;
-//     Dog.create({name, height, weight, life_span })
-//       .then((newDog) => {
-//         let temperamentoIn =  Temperamento.findAll({where: { name:temperamentoB}})
-//        newDog.addTemperamento(temperamentoIn);
-//       //  res.send('Ha Creado con exito el perro');
-//         res.json(newDog);
-//       })
-//       .catch((error) => {
-//         console.log(error)
-//       })
-//   //})
-// }
+
+
+
+  const createVideogames = async (req, res) => {
+    
+    const { name, image, description, released_at, rating, platforms, genre} = req.body;
+    const newGame = await Videogame.create({
+        name,
+        image, 
+        description, 
+        released_at, 
+        rating, 
+        platforms
+    })
+    let genrEn = await Genre.findAll({
+        where: {name:genre }
+    })
+    newGame.addGenre(genrEn);
+    res.send("ya fuiste creado")
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const apiSantiBd= async(req, res)=>{
+  const {id }= req.params
+  const totoUno = await infoBD();
+const toto2 = await totoUno.map(el=>{
+  return{
+  id: el.id,
+  name: el.name,
+  image: el.image,
+  description: el.description,
+  released_at: el.released_at,
+  rating: el.rating,
+  platforms: el.platforms,
+  createDb: true,
+  genre: el.Genres.map(el=>el.name).join(', ')
+  }
+})
+//termina bd
+const detalleVideogames = await axios.get(`https://api.rawg.io/api/games/${id}?key=d0e09f787b57497bb836b8c8bfea4c6e`)
+const el = detalleVideogames.data
+const descriptionT = {
+  id: el.id,
+  name : el.name,
+  image: el.background_image,
+  genre: el.genres.map(el=>el.name).join(", "),
+  description: el.description,
+  released_at: el.released,
+  rating: el.rating,
+  platforms: el.platforms.map(el=>el.platform.name).join(", ")
+}
+arrglo.push(descriptionT) 
+
+const  arrglo =[]
+
+const totohola = arrglo.concat(toto2)
+if (id) {
+  let dogId = await totohola.filter(el => el.id == id)
+  dogId.length?
+    res.status(200).json(dogId):
+    res.status(404).send('No se encontro el perro que buscaba')
+}
+
+}
+
+
+const apiTotoSantiago2 = async (res, req)=>{
+  const datauno = apiSantiBd();
+ const  apiSantiago = apiTotoSantiago()
+ const formal = datauno.apiSantiago
+}
+
 
 
 
 module.exports = { PerrobyApi, infoBD, findAll, findId, CreateDog, DogByName, filterTemperament, deletePerro, 
-                    ByTemperament,perroPromesa }
+                    ByTemperament,perroPromesa, createVideogames, apiSantiBd }

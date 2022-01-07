@@ -180,3 +180,16 @@ padding-top: 5px;
     color: #fff;
     text-decoration: none;
   }
+
+  .loadingConten{
+    height: 90vh;
+    width: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .imgLoading{
+    width: 300px;
+    height: 300px;
+    color: green;
+  }

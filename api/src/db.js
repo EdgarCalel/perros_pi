@@ -31,11 +31,13 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Dog, Temperamento,Diet, Recipe } = sequelize.models;
+const { Dog, Temperamento,Videogame, Genre,Recipe, db } = sequelize.models;
 
 Dog.belongsToMany(Temperamento, {through: "dog-temperamento"});
 Temperamento.belongsToMany(Dog, {through: "dog-temperamento"});
 
+Videogame.belongsToMany(Genre, {through: "Videogame-Genre"});
+Genre.belongsToMany(Videogame, {through: "Videogame-Genre"});
 
 
 // Aca vendrian las relaciones

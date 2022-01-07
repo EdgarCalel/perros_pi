@@ -8,7 +8,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 // importaciones
-const { findAll, findId, CreateDog, DogByName, deletePerro,ByTemperament,perroPromesa } = require('../controllers/perros.controller');
+const { findAll, findId, CreateDog, DogByName, deletePerro,ByTemperament,apiSantiago, createVideogames,apiSantiBd } = require('../controllers/perros.controller');
 const { findDogTemperament, TemperamentoList, CreateTemperamento } = require('../controllers/Temperament.controller');
 const { platfomrs,callRecipeApi }= require('../controllers/platfoms.js')
 const Dog = require('../models/Dog');
@@ -18,7 +18,9 @@ const Dog = require('../models/Dog');
 // perros
 router.get('dogs', async (req, res) =>{})
 
-router.get('/dogs', findAll)
+router.get('/dogsV/:id', apiSantiBd)
+router.post('/videogame',createVideogames )
+
 router.get('/dogsName/:name', DogByName)
 router.get('/dogsi/:id', findId)
 router.post('/dogs', CreateDog)

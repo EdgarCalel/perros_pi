@@ -1,16 +1,14 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link} from "react-router-dom";
 import { postDog, getTemperamentsList } from "../../actions/index";
 import './perros.css'
+import { useNavigate, Link } from "react-router-dom";
 
 function validateForm(input) {
   let errors = {};
   
   if (!input.name) {errors.name = "Tienes que colocar un nombre";
-  
   } else {errors.name = "";}
-
   if (!input.weight_min) {
     
     errors.weight_min = "el peso tiene que ser numero";
@@ -46,6 +44,7 @@ function validateForm(input) {
 
 export default function DogCreation() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const temperament = useSelector((state) => state.temperaments).sort(
     function (a, b) {
       if (a < b) return -1;
@@ -128,6 +127,7 @@ export default function DogCreation() {
           life_span:  '',
           temperament: [],
         });
+        navigate("/Home" )
       } else {
         return alert("Faltan campos por llenar.");
       }
@@ -244,15 +244,7 @@ export default function DogCreation() {
                   );
                 })}
               </select>
-              <div className="sidebar_box">
-                <h4>You have selected that:</h4>
-                {input.temperament.map((el) => (
-                  <div     key={el} className="selectedItems">
-                    <p>{el}</p>
-                    <button onClick={() => handleDelete(el)}>x</button>
-                  </div>
-                ))}
-              </div>
+             
             </div>
             <div className="buttonSection">
               <Link to="/home">
@@ -262,9 +254,23 @@ export default function DogCreation() {
                 Crear 
               </button>
             </div>
+            
           </form>
+          
         </div>
+        
       </div>
+      <div className="contenedorTempera">
+                <h4>Temperamentos seleccionados son:</h4>
+                <div className="toto">
+                {input.temperament.map((el) => (
+                  <div key={el} className="selectedItems">
+                    <p>{el}</p>
+                    <button onClick={() => handleDelete(el)}>x</button>
+                  </div>
+                ))}
+                </div>
+              </div>
       </div>
     </Fragment>
   );
