@@ -174,45 +174,16 @@ const filterTemperament = async (req, res)=>{
   Eliminar.destroy()
   res.status(200).json({message :'Se ha elimanado el perro con nombre: '+ Eliminar.name})
   }
-
-
-
-
   const createVideogames = async (req, res) => {
     
     const { name, image, description, released_at, rating, platforms, genre} = req.body;
-    const newGame = await Videogame.create({
-        name,
-        image, 
-        description, 
-        released_at, 
-        rating, 
-        platforms
-    })
+    const newGame = await Videogame.create({name,image,description,released_at,rating,platforms})
     let genrEn = await Genre.findAll({
         where: {name:genre }
     })
     newGame.addGenre(genrEn);
     res.send("ya fuiste creado")
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const apiSantiBd= async(req, res)=>{
@@ -246,7 +217,7 @@ const descriptionT = {
 }
 arrglo.push(descriptionT) 
 
-const  arrglo =[]g
+const  arrglo =[]
 
 const totohola = arrglo.concat(toto2)
 if (id) {
@@ -264,6 +235,8 @@ const apiTotoSantiago2 = async (res, req)=>{
  const  apiSantiago = apiTotoSantiago()
  const formal = datauno.apiSantiago
 }
+
+
 
 
 
