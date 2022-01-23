@@ -137,6 +137,7 @@ const CreateDog = async (req, res) =>{
     life_span,
     image,
   temperament }= req.body;
+  
   const dogNew = await Dog.create({
     name, 
     height_min, 
@@ -176,25 +177,6 @@ const filterTemperament = async (req, res)=>{
   }
 
 
-
-
-  const createVideogames = async (req, res) => {
-    
-    const { name, image, description, released_at, rating, platforms, genre} = req.body;
-    const newGame = await Videogame.create({
-        name,
-        image, 
-        description, 
-        released_at, 
-        rating, 
-        platforms
-    })
-    let genrEn = await Genre.findAll({
-        where: {name:genre }
-    })
-    newGame.addGenre(genrEn);
-    res.send("ya fuiste creado")
-};
 
 
 
