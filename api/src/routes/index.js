@@ -9,7 +9,7 @@ const router = Router();
 
 // importaciones
 const { findAll, findId, CreateDog, DogByName, deletePerro,ByTemperament,apiSantiago, createVideogames,apiSantiBd } = require('../controllers/perros.controller');
-const { findDogTemperament, TemperamentoList, CreateTemperamento,pokemonTodo } = require('../controllers/Temperament.controller');
+const { findDogTemperament, TemperamentoList, CreateTemperamento } = require('../controllers/Temperament.controller');
 const { platfomrs,callRecipeApi }= require('../controllers/platfoms.js')
 const Dog = require('../models/Dog');
 
@@ -33,6 +33,6 @@ router.get('/temperamentoFilter', ByTemperament)
 router.get('/temperamentCreate', CreateTemperamento)
 router.delete('/dogs/:namedelete', deletePerro)
 
-router.get('/pokemon/:id', pokemonTodo)
+//router.get('/platfomrs', platfomrs)
 
 module.exports = router;
