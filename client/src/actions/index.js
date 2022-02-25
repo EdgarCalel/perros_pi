@@ -19,7 +19,7 @@ export function orderByWeight(payload) {
 }
 export function getDogs() {
     return async function (dispatch) {
-        var json = await axios.get(`https://dogs-kll.herokuapp.com/dogs`)
+        var json = await axios.get(`${REACT_APP_SERVER}/dogs`)
         return dispatch({
             type: 'GET_DOGS',
             payload: json.data,
