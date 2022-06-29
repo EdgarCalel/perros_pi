@@ -39,7 +39,7 @@ export function getDogsByName(name) {
 export function getTemperamentsList() {
     return async function (dispatch) {
         var json = await axios.get(`${REACT_APP_SERVER}/temperamentos`);
-        var listOfTemperaments = json.data.map(el => el.name)
+        var listOfTemperaments = json?.data?.map(el => el?.name)
         return dispatch({
             type: 'GET_TEMPERAMENTS_LIST',
             payload: listOfTemperaments
