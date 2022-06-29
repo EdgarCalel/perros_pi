@@ -32,7 +32,7 @@ export default function DogContainer() {
         <div className="Paginacion" ></div>
         {
          
-          currentDogs.map((el) => { 
+          currentDogs?.map((el) => { 
          
             return  (
           <DogCard
