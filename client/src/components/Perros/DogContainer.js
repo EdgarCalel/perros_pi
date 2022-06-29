@@ -31,7 +31,7 @@ export default function DogContainer() {
         />
         <div className="Paginacion" ></div>
         {
-         console.log(currentDogs)
+         
           currentDogs?.map((el) => { 
          
             return  (
